@@ -56,18 +56,22 @@
 
     .header-left { flex: 1 1 640px; min-width: 320px; }
 
-    /* FIX: ensure the entire right column is left aligned consistently */
+    /* Right side now holds two boxes: pills + contact */
     .header-right {
-      flex: 0 0 300px;
-      min-width: 280px;
-      text-align: left;
-      font-size: 0.95rem;
-      align-self: flex-start;
-      justify-self: start;
+      flex: 0 0 420px;
+      min-width: 320px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      align-content: start;
+      justify-items: stretch;
     }
 
-    .header-right * {
-      text-align: left !important;
+    @media (max-width: 980px) {
+      .header-right {
+        flex: 1 1 420px;
+        grid-template-columns: 1fr;
+      }
     }
 
     .header-identity {
@@ -139,9 +143,26 @@
       flex: 0 0 auto;
     }
 
-    /* NEW: structured right column rows (label/value) */
-    .info-block { margin-top: 0.25rem; }
-    .info-row { margin-top: 0.75rem; }
+    /* Two right-side cards */
+    .side-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.9rem;
+      background: #ffffff;
+      height: 100%;
+    }
+
+    .side-title {
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: #111827;
+      margin: 0 0 0.5rem;
+    }
+
+    /* Structured right column rows (label/value) */
+    .info-block { margin-top: 0.1rem; }
+    .info-row { margin-top: 0.65rem; }
+    .info-row:first-child { margin-top: 0; }
     .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
     .info-value { margin-top: 0.15rem; }
     .info-value .small { display: block; margin-top: 0.15rem; }
@@ -160,18 +181,6 @@
       margin-top: 0.9rem;
     }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
-    }
-
-    @media (max-width: 980px) {
-      .header-right { flex: 1 1 320px; }
-      .grid-3 { grid-template-columns: 1fr; }
-    }
-
     @media (max-width: 720px) {
       .grid-2 { grid-template-columns: 1fr; }
       .header-identity { flex-direction: column; align-items: flex-start; }
@@ -188,11 +197,9 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin: 0.75rem 0 0;
+      margin: 0;
       padding: 0;
       list-style: none;
-
-      /* keep pills starting at left margin */
       justify-content: flex-start;
       align-items: flex-start;
     }
@@ -204,8 +211,6 @@
       font-size: 0.85rem;
       color: #111827;
       border: 1px solid #e5e7eb;
-
-      /* do not stretch wider than the text */
       flex: 0 0 auto;
       width: auto;
       max-width: 100%;
@@ -278,6 +283,7 @@
       a { color: #111827; text-decoration: none; }
       .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
       .kpi { background: #ffffff; }
+      .side-card { border: 1px solid #d1d5db; }
     }
   </style>
 </head>
@@ -319,60 +325,68 @@
 
               <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
             </div>
-
-            <ul class="pill-list" aria-label="Keywords">
-              <li>Artificial Intelligence</li>
-              <li>Machine Learning</li>
-              <li>Deep Learning</li>
-              <li>AI Governance</li>
-              <li>Digital Transformations</li>
-              <li>Digital Health</li>
-              <li>Cardio Endocrinology</li>
-              <li>Molecular Endocrinology</li>
-              <li>Circulatory Physiology</li>
-              <li>Endothelial Dysfunction</li>
-              <li>Vasculature Pathophysiology</li>
-            </ul>
           </div>
         </div>
       </div>
 
-      <div class="header-right" aria-label="Contact and identifiers">
-        <div class="info-block">
-          <div class="info-row">
-            <div class="info-label">Countries</div>
-            <div class="info-value">United States, Brazil</div>
-          </div>
+      <!-- RIGHT SIDE: pills in a separate box next to contact info -->
+      <div class="header-right" aria-label="Right side panels">
+        <aside class="side-card" aria-label="Keywords panel">
+          <div class="side-title">Keywords</div>
+          <ul class="pill-list" aria-label="Keywords">
+            <li>Artificial Intelligence</li>
+            <li>Machine Learning</li>
+            <li>Deep Learning</li>
+            <li>AI Governance</li>
+            <li>Digital Transformations</li>
+            <li>Digital Health</li>
+            <li>Cardio Endocrinology</li>
+            <li>Molecular Endocrinology</li>
+            <li>Circulatory Physiology</li>
+            <li>Endothelial Dysfunction</li>
+            <li>Vasculature Pathophysiology</li>
+          </ul>
+        </aside>
 
-          <div class="info-row">
-            <div class="info-label">Primary email</div>
-            <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
-          </div>
+        <aside class="side-card" aria-label="Contact and identifiers">
+          <div class="side-title">Contact and Identifiers</div>
+          <div class="info-block">
+            <div class="info-row">
+              <div class="info-label">Countries</div>
+              <div class="info-value">United States, Brazil</div>
+            </div>
 
-          <div class="info-row">
-            <div class="info-label">Other IDs</div>
-            <div class="info-value">
-              <div class="small">
-                Scopus Author ID:
-                <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
-              </div>
-              <div class="small">
-                SciProfiles:
-                <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
-              </div>
-              <div class="small">
-                ResearcherID:
-                <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
+            <div class="info-row">
+              <div class="info-label">Primary email</div>
+              <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Other IDs</div>
+              <div class="info-value">
+                <div class="small">
+                  Scopus Author ID:
+                  <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
+                </div>
+                <div class="small">
+                  SciProfiles:
+                  <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
+                </div>
+                <div class="small">
+                  ResearcherID:
+                  <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="info-row">
-            <div class="info-label">Core methods and tooling</div>
-            <div class="info-value">Python, R, Stata, SQL</div>
+            <div class="info-row">
+              <div class="info-label">Core methods and tooling</div>
+              <div class="info-value">Python, R, Stata, SQL</div>
+            </div>
           </div>
-        </div>
+        </aside>
       </div>
+      <!-- END RIGHT SIDE -->
     </header>
 
     <section>
@@ -434,13 +448,13 @@
           <div class="subheading">Graduate and Certificate Training</div>
           <ul>
             <li>Boston University | MS Health Informatics (Data Analytics) candidate | 2025 to 2027</li>
-            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT)| 2024 to 2025</li>
+            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT) | 2024 to 2025</li>
             <li>UC San Diego | Drug discovery, development, and product management specialization | 2025</li>
             <li>Northeastern University | Health informatics for healthcare professionals certificate | 2025</li>
             <li>Johns Hopkins | Clinical informatics specialization | 2025</li>
             <li>Johns Hopkins | Bioinformatics, Python for genomic data science certificate | 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP)| 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR)| 2024</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP) | 2025</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR) | 2024</li>
             <li>HarvardX via edX | AI and machine learning with R and Python, statistics and R, Python for research | 2024</li>
             <li>Pontifícia Universidade Católica de Goiás | Medical genetics masters program | 2015 to 2016</li>
           </ul>
@@ -449,9 +463,9 @@
         <div class="card">
           <div class="subheading">Medical Training and Board Certification</div>
           <ul>
-            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine MD | 1996 to 2002</li>
+            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine (MD) | 1996 to 2002</li>
             <li>Endocrinology, diabetes and metabolism | Board certification (SBEM/CFM/AMB) | 2014</li>
-            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB)| 2013 to 2014</li>
+            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB) | 2013 to 2014</li>
             <li>Nutrology fellowship | 2012 to 2013</li>
             <li>Endocrinology fellowship | 2011 to 2013</li>
             <li>Medical biochemistry postgraduate program | 2006 to 2008</li>
