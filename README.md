@@ -43,6 +43,7 @@
     .muted { color: #6b7280; font-size: 0.95rem; }
     .small { font-size: 0.92rem; }
 
+    /* ================= HEADER (TOP ROW) ================= */
     .header {
       display: flex;
       flex-wrap: wrap;
@@ -50,30 +51,17 @@
       gap: 1.25rem;
       border-bottom: 2px solid #e5e7eb;
       padding-bottom: 1rem;
-      margin-bottom: 1.5rem;
-      align-items: stretch;
+      margin-bottom: 0.9rem;
+      align-items: flex-start;
     }
 
-    .header-left { flex: 1 1 640px; min-width: 320px; }
-
-    /* FIX: ensure the entire right column is left aligned consistently */
-    .header-right {
-      flex: 0 0 300px;
-      min-width: 280px;
-      text-align: left;
-      font-size: 0.95rem;
-      align-self: flex-start;       /* top align vs stretching */
-      justify-self: start;
-    }
-
-    .header-right * {
-      text-align: left !important;  /* hard enforce left alignment */
-    }
+    .header-left { flex: 1 1 780px; min-width: 320px; }
+    .header-right { display: none; } /* contact moved to full width block below */
 
     .header-identity {
       display: flex;
       gap: 1rem;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     .header-identity-text {
@@ -82,6 +70,7 @@
       min-width: 0;
     }
 
+    /* Photo size unchanged */
     .profile-photo {
       width: auto;
       height: 100%;
@@ -139,13 +128,82 @@
       flex: 0 0 auto;
     }
 
-    /* NEW: structured right column rows (label/value) */
-    .info-block { margin-top: 0.25rem; }
-    .info-row { margin-top: 0.75rem; }
-    .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
-    .info-value { margin-top: 0.15rem; }
-    .info-value .small { display: block; margin-top: 0.15rem; }
+    /* ================= CONTACT BOX (FULL WIDTH) ================= */
+    .contact-wide {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.85rem 0.95rem;
+      background: #ffffff;
+      margin-bottom: 1.25rem;
+    }
 
+    .contact-wide-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem 1rem;
+      align-items: start;
+    }
+
+    .contact-wide-item .label {
+      color: #6b7280;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .contact-wide-item .value {
+      margin-top: 0.15rem;
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .contact-wide-item .value .small {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .contact-wide-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 560px) {
+      .contact-wide-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ================= KEYWORDS BOX (VISIBLE, FULL WIDTH) ================= */
+    .keywords-frame {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.85rem 0.95rem;
+      background: #ffffff;
+      margin-top: 0.85rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      justify-content: flex-start;
+    }
+
+    .pill-list li {
+      background: #f9fafb;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.85rem;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+      text-align: left;
+    }
+
+    /* ================= CARDS / GRIDS ================= */
     .card {
       border: 1px solid #e5e7eb;
       border-radius: 0.75rem;
@@ -168,7 +226,6 @@
     }
 
     @media (max-width: 980px) {
-      .header-right { flex: 1 1 320px; }
       .grid-3 { grid-template-columns: 1fr; }
     }
 
@@ -182,23 +239,6 @@
         max-height: none;
         margin-top: 0;
       }
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.75rem 0 0;
-      padding: 0;
-      list-style: none;
-    }
-    .pill-list li {
-      background: #f9fafb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #111827;
-      border: 1px solid #e5e7eb;
     }
 
     .item { margin-bottom: 1rem; }
@@ -215,6 +255,7 @@
     ul { margin-top: 0.4rem; padding-left: 1.1rem; }
     li { margin-bottom: 0.35rem; }
 
+    /* Link animation */
     a { color: #2563eb; text-decoration: none; }
     a, .badge {
       transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, opacity 160ms ease;
@@ -273,6 +314,8 @@
 
 <body>
   <main class="page">
+
+    <!-- TOP ROW: PHOTO + IDENTITY -->
     <header class="header">
       <div class="header-left">
         <div class="header-identity">
@@ -309,59 +352,68 @@
               <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
             </div>
 
-            <ul class="pill-list" aria-label="Keywords">
-              <li>Artificial intelligence and Machine Learning</li>
-              <li>Digital Transformations and Digital Health</li>
-              <li>Cardio Endocrinology</li>
-              <li>Molecular Endocrinology</li>
-              <li>Circulatory Physiology</li>
-              <li>Endothelial Dysfunction</li>
-              <li>Vasculature Pathophysiology</li>
-            </ul>
+            <!-- KEYWORDS: full width visible frame, below contact block -->
           </div>
         </div>
       </div>
+    </header>
 
-      <!-- UPDATED: aligned left (label/value blocks) -->
-      <div class="header-right" aria-label="Contact and identifiers">
-        <div class="info-block">
-          <div class="info-row">
-            <div class="info-label">Countries</div>
-            <div class="info-value">United States, Brazil</div>
+    <!-- FULL WIDTH CONTACT BOX -->
+    <div class="contact-wide" aria-label="Contact and identifiers">
+      <div class="contact-wide-grid">
+        <div class="contact-wide-item">
+          <div class="label">Countries</div>
+          <div class="value">United States, Brazil</div>
+        </div>
+
+        <div class="contact-wide-item">
+          <div class="label">Primary email</div>
+          <div class="value">
+            <a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a>
           </div>
+        </div>
 
-          <div class="info-row">
-            <div class="info-label">Primary email</div>
-            <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
-          </div>
-
-          <div class="info-row">
-            <div class="info-label">Other IDs</div>
-            <div class="info-value">
-              <div class="small">
-                Scopus Author ID:
-                <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
-              </div>
-              <div class="small">
-                SciProfiles:
-                <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
-              </div>
-              <div class="small">
-                ResearcherID:
-                <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
-              </div>
+        <div class="contact-wide-item">
+          <div class="label">Other IDs</div>
+          <div class="value">
+            <div class="small">
+              Scopus Author ID:
+              <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
+            </div>
+            <div class="small">
+              SciProfiles:
+              <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
+            </div>
+            <div class="small">
+              ResearcherID:
+              <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
             </div>
           </div>
+        </div>
 
-          <div class="info-row">
-            <div class="info-label">Core methods and tooling</div>
-            <div class="info-value">Python, R, Stata, SQL</div>
-          </div>
+        <div class="contact-wide-item">
+          <div class="label">Core methods and tooling</div>
+          <div class="value">Python, R, Stata, SQL</div>
         </div>
       </div>
-      <!-- END UPDATED -->
+    </div>
 
-    </header>
+    <!-- FULL WIDTH KEYWORDS BOX (VISIBLE FRAME, HORIZONTAL) -->
+    <div class="keywords-frame" aria-label="Keywords">
+      <ul class="pill-list">
+        <li>Artificial Intelligence</li>
+        <li>Machine Learning</li>
+        <li>Deep Learning</li>
+        <li>AI Governance</li>
+        <li>Digital Transformations</li>
+        <li>Digital Health</li>
+        <li>Cardio Endocrinology</li>
+        <li>Molecular Endocrinology</li>
+        <li>Circulatory Physiology</li>
+        <li>Endothelial Dysfunction</li>
+        <li>Vasculature Pathophysiology</li>
+      </ul>
+    </div>
 
     <section>
       <h2>Research and Leadership Summary</h2>
