@@ -1,363 +1,252 @@
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Julian Y. V. Borges, MD, MS | Researcher CV (ORCID)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<title>Julian Y. V. Borges, MD, MS | Researcher CV (ORCID)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    :root {
-      font-size: 16px;
-      line-height: 1.5;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #111827;
-      background-color: #f3f4f6;
-    }
+<style>
+/* ================= BASE ================= */
+:root {
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #111827;
+  background-color: #f3f4f6;
+}
+body { margin: 0; padding: 0; }
 
-    body { margin: 0; padding: 0; }
+.page {
+  max-width: 1120px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08);
+  border-radius: .75rem;
+}
 
-    .page {
-      max-width: 1120px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #ffffff;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-      border-radius: 0.75rem;
-    }
+h1, h2, h3 { margin-top: 0; }
+h1 {
+  font-size: 2rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+h2 {
+  font-size: 1.35rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: .4rem;
+}
 
-    h1, h2, h3, h4 { margin-top: 0; color: #111827; }
-    h1 {
-      font-size: 2rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-    h2 {
-      font-size: 1.35rem;
-      margin-top: 2rem;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 0.4rem;
-    }
-    h3 { font-size: 1.05rem; margin-bottom: 0.2rem; }
-    p { margin: 0.5rem 0; }
+.muted { color: #6b7280; }
+.small { font-size: .92rem; }
 
-    .muted { color: #6b7280; font-size: 0.95rem; }
-    .small { font-size: 0.92rem; }
+/* ================= HEADER ================= */
+.header {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+}
 
-    .header {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 1rem;
-      margin-bottom: 1.5rem;
-      align-items: flex-start;
-    }
+/* ===== LEFT COLUMN (LOCKED) ===== */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
 
-    /* LEFT RAIL LOCKED UNDER PHOTO */
-    .left-rail {
-      flex: 0 0 260px;
-      min-width: 240px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+/* PHOTO — unchanged size */
+.profile-photo {
+  width: auto;
+  height: 100%;
+  min-height: 176px;
+  max-height: 240px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: .75rem;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
 
-    /* MAIN HEADER CONTENT (NAME, TAGLINE, SUMMARY, BADGES) */
-    .header-main {
-      flex: 1 1 640px;
-      min-width: 320px;
-    }
+/* CONTACT BOX */
+.contact-box {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: .75rem;
+  padding: .75rem .9rem;
+  background: #ffffff;
+  font-size: .95rem;
+}
 
-    .profile-photo {
-      width: auto;
-      height: 100%;
-      min-height: 176px;
-      max-height: 240px;
-      aspect-ratio: 3 / 4;
-      object-fit: cover;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      background: #ffffff;
-      flex: 0 0 auto;
-      margin-top: 10px;
-    }
+.contact-row {
+  margin-bottom: .6rem;
+}
+.contact-label {
+  font-weight: 700;
+  color: #6b7280;
+  font-size: .85rem;
+}
+.contact-value {
+  margin-top: .15rem;
+}
 
-    /* CONTACT BOX UNDER PHOTO */
-    .contact-box {
-      width: 100%;
-      margin-top: 0.9rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 0.85rem;
-      background: #ffffff;
-    }
+/* KEYWORDS BOX (INVISIBLE RECTANGLE) */
+.keywords-box {
+  width: 100%;
+  padding-top: .25rem;
+}
 
-    .info-block { margin-top: 0.1rem; }
-    .info-row { margin-top: 0.75rem; }
-    .info-row:first-child { margin-top: 0; }
-    .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
-    .info-value { margin-top: 0.15rem; }
-    .info-value .small { display: block; margin-top: 0.15rem; }
+/* Pills unchanged size */
+.pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: flex-start;
+}
+.pill-list li {
+  background: #f9fafb;
+  border-radius: 999px;
+  padding: .25rem .75rem;
+  font-size: .85rem;
+  border: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
 
-    /* PILLS BOX UNDER CONTACT BOX, RECTANGULAR BUT INVISIBLE */
-    .pills-box {
-      width: 100%;
-      margin-top: 0.9rem;
-      padding: 0;
-      border: 0;
-      background: transparent;
-    }
+/* ===== RIGHT COLUMN ===== */
+.header-right {
+  display: flex;
+  flex-direction: column;
+}
 
-    .tagline {
-      margin-top: 0.25rem;
-      font-weight: 700;
-      color: #374151;
-    }
+.tagline { font-weight: 700; margin-top: .25rem; }
+.tertiary { color: #6b7280; margin-top: .15rem; }
 
-    .tertiary {
-      margin-top: 0.15rem;
-      color: #6b7280;
-      font-size: 0.95rem;
-    }
+/* BADGES */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .75rem;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  background: #eef2ff;
+  border: 1px solid #e0e7ff;
+  border-radius: 999px;
+  padding: .25rem .75rem;
+  font-size: .85rem;
+  color: #3730a3;
+  text-decoration: none;
+}
+.badge-icon {
+  width: .95rem;
+  height: .95rem;
+}
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-      align-items: center;
-    }
+/* ================= SECTIONS ================= */
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: .75rem;
+  padding: 1rem;
+  background: #fff;
+}
+section { margin-top: 1.75rem; }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      background: #eef2ff;
-      border: 1px solid #e0e7ff;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #3730a3;
-      text-decoration: none;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    .badge-icon {
-      width: 0.95rem;
-      height: 0.95rem;
-      display: inline-block;
-      vertical-align: middle;
-      flex: 0 0 auto;
-    }
-
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      background: #ffffff;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
-    }
-
-    @media (max-width: 980px) {
-      .grid-3 { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .grid-2 { grid-template-columns: 1fr; }
-
-      .header {
-        flex-direction: column;
-      }
-
-      .left-rail {
-        flex: 1 1 auto;
-        width: 100%;
-        min-width: 0;
-      }
-
-      .profile-photo {
-        width: 160px;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin-top: 0;
-      }
-
-      .contact-box,
-      .pills-box {
-        width: 100%;
-      }
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .pill-list li {
-      background: #f9fafb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-      text-align: left;
-    }
-
-    .item { margin-bottom: 1rem; }
-    .item-header {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      align-items: baseline;
-    }
-    .item-title { font-weight: 800; }
-    .item-meta { font-size: 0.92rem; color: #6b7280; }
-
-    ul { margin-top: 0.4rem; padding-left: 1.1rem; }
-    li { margin-bottom: 0.35rem; }
-
-    a { color: #2563eb; text-decoration: none; }
-    a, .badge {
-      transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, opacity 160ms ease;
-      will-change: transform;
-    }
-    a:hover { text-decoration: underline; transform: translateY(-1px); }
-    a:active { transform: translateY(0px); opacity: 0.95; }
-    a:focus-visible {
-      outline: 3px solid rgba(37, 99, 235, 0.35);
-      outline-offset: 3px;
-      border-radius: 0.4rem;
-    }
-    .badge:hover {
-      transform: translateY(-1px) scale(1.04);
-      box-shadow: 0 10px 18px rgba(17, 24, 39, 0.10);
-      background: #e0e7ff;
-      text-decoration: none;
-    }
-    .badge:active {
-      transform: translateY(0px) scale(0.99);
-      box-shadow: 0 6px 10px rgba(17, 24, 39, 0.08);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      a, .badge { transition: none !important; }
-      a:hover, .badge:hover { transform: none !important; box-shadow: none !important; }
-    }
-
-    .kpi {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 0.9rem;
-      background: #f9fafb;
-      height: 100%;
-    }
-    .kpi .kpi-title { font-weight: 800; margin-bottom: 0.15rem; }
-    .kpi .kpi-text { color: #374151; font-size: 0.95rem; }
-
-    .subheading { font-weight: 800; margin-top: 1rem; margin-bottom: 0.35rem; }
-
-    @media print {
-      :root { background: #ffffff; }
-      .page {
-        box-shadow: none;
-        margin: 0;
-        border-radius: 0;
-        max-width: none;
-        padding: 0.75in;
-      }
-      a { color: #111827; text-decoration: none; }
-      .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
-      .kpi { background: #ffffff; }
-      .contact-box { border: 1px solid #d1d5db; }
-    }
-  </style>
+@media (max-width: 900px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
-  <main class="page">
-    <header class="header">
-      <!-- LEFT RAIL: PHOTO + CONTACT BOX + PILLS BOX -->
-      <div class="left-rail">
-        <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
+<main class="page">
 
-        <div class="contact-box" aria-label="Contact and identifiers">
-          <div class="info-block">
-            <div class="info-row">
-              <div class="info-label">Countries</div>
-              <div class="info-value">United States, Brazil</div>
-            </div>
+<header class="header">
 
-            <div class="info-row">
-              <div class="info-label">Primary email</div>
-              <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
-            </div>
+  <!-- LEFT LOCKED COLUMN -->
+  <div class="header-left">
 
-            <div class="info-row">
-              <div class="info-label">Other IDs</div>
-              <div class="info-value">
-                <div class="small">
-                  Scopus Author ID:
-                  <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
-                </div>
-                <div class="small">
-                  SciProfiles:
-                  <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
-                </div>
-                <div class="small">
-                  ResearcherID:
-                  <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
-                </div>
-              </div>
-            </div>
+    <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo"/>
 
-            <div class="info-row">
-              <div class="info-label">Core methods and tooling</div>
-              <div class="info-value">Python, R, Stata, SQL</div>
-            </div>
-          </div>
-        </div>
+    <div class="contact-box">
+      <div class="contact-row">
+        <div class="contact-label">Countries</div>
+        <div class="contact-value">United States, Brazil</div>
+      </div>
 
-        <div class="pills-box" aria-label="Keywords box">
-          <ul class="pill-list" aria-label="Keywords">
-            <li>Artificial Intelligence</li>
-            <li>Machine Learning</li>
-            <li>Deep Learning</li>
-            <li>AI Governance</li>
-            <li>Digital Transformations</li>
-            <li>Digital Health</li>
-            <li>Cardio Endocrinology</li>
-            <li>Molecular Endocrinology</li>
-            <li>Circulatory Physiology</li>
-            <li>Endothelial Dysfunction</li>
-            <li>Vasculature Pathophysiology</li>
-          </ul>
+      <div class="contact-row">
+        <div class="contact-label">Primary email</div>
+        <div class="contact-value">
+          <a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a>
         </div>
       </div>
+
+      <div class="contact-row">
+        <div class="contact-label">Other IDs</div>
+        <div class="contact-value small">
+          Scopus: <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100">59247184100</a><br>
+          ResearcherID: <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024">KVZ-2689-2024</a>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-label">Methods</div>
+        <div class="contact-value">Python, R, Stata, SQL</div>
+      </div>
+    </div>
+
+    <div class="keywords-box">
+      <ul class="pill-list">
+        <li>Artificial Intelligence</li>
+        <li>Machine Learning</li>
+        <li>Deep Learning</li>
+        <li>AI Governance</li>
+        <li>Digital Transformations</li>
+        <li>Digital Health</li>
+        <li>Cardio Endocrinology</li>
+        <li>Molecular Endocrinology</li>
+        <li>Circulatory Physiology</li>
+        <li>Endothelial Dysfunction</li>
+        <li>Vasculature Pathophysiology</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- RIGHT CONTENT COLUMN -->
+  <div class="header-right">
+    <h1>Julian Y. V. Borges, MD, MS</h1>
+    <div class="tagline">Clinician Scientist | Clinical Informatics | Responsible Clinical AI | Genomics</div>
+    <div class="tertiary">Clinical Research · Medical Informatics · AI Governance</div>
+
+    <p class="muted small">
+      I connect clinical medicine, artificial intelligence, and genomic science to build data driven systems that advance precision endocrinology and enable safer,
+      more effective clinical decision making. My work focuses on research, informatics, and digital health infrastructure that bridges clinical knowledge with academic
+      investigation and real world deployment.
+    </p>
+
+    <div class="badge-row">
+      <a class="badge" href="https://orcid.org/0009-0001-9929-3135">ORCID</a>
+      <a class="badge" href="https://www.linkedin.com/in/julian-borges-md/">LinkedIn</a>
+      <a class="badge" href="https://github.com/julian-borges-md">GitHub</a>
+      <a class="badge" href="https://x.com/julianborgesmd">X</a>
+      <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges">Harvard Dataverse</a>
+    </div>
+  </div>
+
+</header>
+
+      <!-- ALL OTHER SECTIONS UNCHANGED BELOW -->
 
       <!-- MAIN HEADER: NAME + TAGLINE + SUMMARY + BADGES -->
       <div class="header-main">
