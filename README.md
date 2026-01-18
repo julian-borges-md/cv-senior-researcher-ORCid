@@ -44,34 +44,26 @@
     .muted { color: #6b7280; font-size: 0.95rem; }
     .small { font-size: 0.92rem; }
 
-    /* ================= HEADER LAYOUT (PRINT FRIENDLY) =================
-       Goal:
-       - Photo aligns vertically with the name/summary block to the right.
-       - Contact box sits under photo, not "too high".
-       - Keywords box becomes horizontal and compact for printing.
-    */
+    /* ================= HEADER LAYOUT ================= */
     .header {
       display: grid;
       grid-template-columns: 260px 1fr;
       gap: 1.5rem;
       border-bottom: 2px solid #e5e7eb;
       padding-bottom: 1.25rem;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.25rem;
       align-items: start;
     }
 
-    /* LEFT column becomes a fixed rail aligned with the right content block */
     .left-rail {
       display: grid;
-      grid-template-rows: auto auto auto;
+      grid-template-rows: auto auto;
       gap: 0.85rem;
       align-content: start;
-      /* This is the key alignment fix: drop the entire left rail down slightly
-         so it visually centers with the right headline/summary. */
-      padding-top: 0.55rem;
+      padding-top: 0.55rem; /* keeps left rail visually aligned with right text */
     }
 
-    /* Profile photo: keep your sizing intact */
+    /* Profile photo size unchanged */
     .profile-photo {
       width: auto;
       height: 100%;
@@ -87,7 +79,6 @@
       display: block;
     }
 
-    /* Contact information box */
     .contact-box {
       width: 100%;
       border: 1px solid #e5e7eb;
@@ -103,42 +94,6 @@
     .info-value { margin-top: 0.15rem; text-align: left; }
     .info-value .small { display: block; margin-top: 0.15rem; }
 
-    /* Keywords box: horizontal, compact, does not waste vertical space */
-    .keywords-box {
-      width: 100%;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      background: #ffffff;
-      padding: 0.65rem 0.75rem;
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;          /* allows 2-3 rows if needed, still horizontal */
-      gap: 0.5rem;              /* keep your spacing */
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    .pill-list li {
-      background: #f9fafb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-      text-align: left;
-      white-space: nowrap;
-      margin-bottom: 0; /* prevent extra vertical growth */
-    }
-
-    /* RIGHT column */
     .right-rail {
       display: flex;
       flex-direction: column;
@@ -189,6 +144,43 @@
       flex: 0 0 auto;
     }
 
+    /* ================= KEYWORDS FULL-WIDTH (VISIBLE FRAME) =================
+       Requirement: one margin to the other, horizontally oriented, visible frame.
+       Implementation: a full-width framed bar placed immediately under the header. */
+    .keywords-wide {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.75rem 0.9rem;
+      background: #ffffff;
+      margin-top: 0.25rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;          /* stays horizontal; wraps to next row as needed */
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .pill-list li {
+      background: #f9fafb;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.85rem;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+      text-align: left;
+      margin-bottom: 0;
+    }
+
     .card {
       border: 1px solid #e5e7eb;
       border-radius: 0.75rem;
@@ -215,12 +207,8 @@
     }
 
     @media (max-width: 900px) {
-      .header {
-        grid-template-columns: 1fr;
-      }
-      .left-rail {
-        padding-top: 0; /* remove alignment offset on stacked layout */
-      }
+      .header { grid-template-columns: 1fr; }
+      .left-rail { padding-top: 0; }
     }
 
     @media (max-width: 720px) {
@@ -301,7 +289,7 @@
       a { color: #111827; text-decoration: none; }
       .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
       .kpi { background: #ffffff; }
-      .keywords-box, .contact-box { border: 1px solid #d1d5db; }
+      .keywords-wide, .contact-box { border: 1px solid #d1d5db; }
     }
   </style>
 </head>
@@ -311,8 +299,8 @@
 
     <header class="header">
 
-      <!-- LEFT COLUMN: photo + contact + horizontal keywords -->
-      <div class="left-rail" aria-label="Photo, contact information, and keywords">
+      <!-- LEFT COLUMN: photo + contact (keywords removed from left rail) -->
+      <div class="left-rail" aria-label="Photo and contact information">
         <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
 
         <div class="contact-box" aria-label="Contact information">
@@ -348,22 +336,6 @@
             <div class="info-label">Core methods and tooling</div>
             <div class="info-value">Python, R, Stata, SQL</div>
           </div>
-        </div>
-
-        <div class="keywords-box" aria-label="Keywords box">
-          <ul class="pill-list" aria-label="Keywords">
-            <li>Artificial Intelligence</li>
-            <li>Machine Learning</li>
-            <li>Deep Learning</li>
-            <li>AI Governance</li>
-            <li>Digital Transformations</li>
-            <li>Digital Health</li>
-            <li>Cardio Endocrinology</li>
-            <li>Molecular Endocrinology</li>
-            <li>Circulatory Physiology</li>
-            <li>Endothelial Dysfunction</li>
-            <li>Vasculature Pathophysiology</li>
-          </ul>
         </div>
       </div>
 
@@ -402,7 +374,22 @@
 
     </header>
 
-    <!-- ===== Everything below remains exactly as you already had it (content unchanged) ===== -->
+    <!-- FULL WIDTH KEYWORDS BOX (VISIBLE FRAME) -->
+    <div class="keywords-wide" aria-label="Keywords full width">
+      <ul class="pill-list" aria-label="Keywords">
+        <li>Artificial Intelligence</li>
+        <li>Machine Learning</li>
+        <li>Deep Learning</li>
+        <li>AI Governance</li>
+        <li>Digital Transformations</li>
+        <li>Digital Health</li>
+        <li>Cardio Endocrinology</li>
+        <li>Molecular Endocrinology</li>
+        <li>Circulatory Physiology</li>
+        <li>Endothelial Dysfunction</li>
+        <li>Vasculature Pathophysiology</li>
+      </ul>
+    </div>
 
     <section>
       <h2>Research and Leadership Summary</h2>
