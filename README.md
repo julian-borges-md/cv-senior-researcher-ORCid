@@ -56,6 +56,7 @@
 
     .header-left { flex: 1 1 640px; min-width: 320px; }
 
+    /* FIX: ensure the entire right column is left aligned consistently */
     .header-right {
       flex: 0 0 300px;
       min-width: 280px;
@@ -65,24 +66,22 @@
       justify-self: start;
     }
 
-    .header-right * { text-align: left !important; }
+    .header-right * {
+      text-align: left !important;
+    }
 
     .header-identity {
       display: flex;
       gap: 1rem;
       align-items: stretch;
-      width: 100%;
     }
 
-    /* Key fix: this prevents pills from being "trapped" beside the photo */
     .header-identity-text {
       display: flex;
       flex-direction: column;
       min-width: 0;
-      width: 100%;
     }
 
-    /* Photo: pulled down + not too high + stable sizing */
     .profile-photo {
       width: auto;
       height: 100%;
@@ -94,8 +93,7 @@
       border: 1px solid #e5e7eb;
       background: #ffffff;
       flex: 0 0 auto;
-      margin-top: 18px; /* stronger pull-down so it is not too high */
-      align-self: flex-start;
+      margin-top: 10px;
     }
 
     .tagline {
@@ -110,7 +108,6 @@
       font-size: 0.95rem;
     }
 
-    /* Badges alignment fix: consistent height + icon alignment */
     .badge-row {
       display: flex;
       flex-wrap: wrap;
@@ -122,19 +119,16 @@
     .badge {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 0.45rem;
       background: #eef2ff;
       border: 1px solid #e0e7ff;
       border-radius: 999px;
-      padding: 0.35rem 0.8rem; /* slightly taller to center icons visually */
+      padding: 0.25rem 0.75rem;
       font-size: 0.85rem;
       color: #3730a3;
       text-decoration: none;
       white-space: nowrap;
-      line-height: 1.1;
-      min-height: 34px; /* forces all badges to the same height */
-      box-sizing: border-box;
+      line-height: 1;
     }
 
     .badge-icon {
@@ -144,37 +138,6 @@
       vertical-align: middle;
       flex: 0 0 auto;
     }
-
-    /* NEW: pills layout for full width distribution + correct sizing */
-    .pill-list {
-      list-style: none;
-      padding: 0;
-      margin: 1.4rem 0 0; /* two-ish lines below badges */
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr)); /* distributes across full width */
-      gap: 0.6rem;
-      width: 100%;
-      align-items: start;
-    }
-
-    /* pills now size to text and do not look oversized */
-    .pill-list li {
-      display: inline-flex;
-      align-items: center;
-      justify-content: flex-start;
-      width: fit-content;            /* pill hugs the text */
-      max-width: 100%;               /* but never overflow the grid cell */
-      background: #f9fafb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-      line-height: 1.25;
-    }
-
-    /* Keep the grid distribution but left align pills within each cell */
-    .pill-list > li { justify-self: start; }
 
     /* NEW: structured right column rows (label/value) */
     .info-block { margin-top: 0.25rem; }
@@ -207,7 +170,6 @@
     @media (max-width: 980px) {
       .header-right { flex: 1 1 320px; }
       .grid-3 { grid-template-columns: 1fr; }
-      .pill-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 720px) {
@@ -220,7 +182,34 @@
         max-height: none;
         margin-top: 0;
       }
-      .pill-list { grid-template-columns: 1fr; }
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+
+      /* keep pills starting at left margin */
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .pill-list li {
+      background: #f9fafb;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.85rem;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+
+      /* do not stretch wider than the text */
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+      text-align: left;
     }
 
     .item { margin-bottom: 1rem; }
@@ -332,8 +321,12 @@
             </div>
 
             <ul class="pill-list" aria-label="Keywords">
-              <li>Artificial intelligence and Machine Learning</li>
-              <li>Digital Transformations and Digital Health</li>
+              <li>Artificial Intelligence</li>
+              <li>Machine Learning</li>
+              <li>Deep Learning</li>
+              <li>AI Governance</li>
+              <li>Digital Transformations</li>
+              <li>Digital Health</li>
               <li>Cardio Endocrinology</li>
               <li>Molecular Endocrinology</li>
               <li>Circulatory Physiology</li>
@@ -659,7 +652,7 @@
 
           <div class="subheading">MitoCoreX Project, Principal Investigator</div>
           <p class="small">
-            AI enabled discovery and development platform designed to optimize mitochondrial function through genomics aware targeting, multi agent systems, and in silico validation for aging related disease, neurodegeneration, and metabolic performance.
+            AI enabled discovery and development platform designed to optimize mitochondrial function through genomics aware targeting, multi agent systems, reinforcement learning, and in silico validation for aging related disease, neurodegeneration, and metabolic performance.
           </p>
         </div>
       </div>
