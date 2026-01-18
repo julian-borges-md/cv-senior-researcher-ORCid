@@ -302,19 +302,6 @@
               </a>
             </div>
 
-            <ul class="pill-list" aria-label="Keywords">
-              <li>Emerging Technologies</li>
-              <li>Digital Health</li>
-              <li>Cardiovascular Disease</li>
-              <li>Molecular Endocrinology</li>
-              <li>Circulatory Physiology</li>
-              <li>Endothelial Dysfunction</li>
-              <li>Vasculature Pathophysiology</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
       <div class="header-right" aria-label="Contact and identifiers">
         <div class="muted small">Countries</div>
         <div>United States, Brazil</div>
@@ -340,7 +327,20 @@
         <div class="small">Python, R, Stata, SQL</div>
       </div>
     </header>
-
+    
+            <ul class="pill-list" aria-label="Keywords">
+              <li>Emerging Technologies</li>
+              <li>Digital Health</li>
+              <li>Cardiovascular Disease</li>
+              <li>Molecular Endocrinology</li>
+              <li>Circulatory Physiology</li>
+              <li>Endothelial Dysfunction</li>
+              <li>Vasculature Pathophysiology</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
     <section>
       <h2>Research and Leadership Summary</h2>
       <div class="card">
