@@ -573,4 +573,74 @@
           </li>
 
           <li>
-            A Machine Learning Framework for Early Detection of Cardiovascular Risk Using Diabetes Related Indicators (20
+            A Machine Learning Framework for Early Detection of Cardiovascular Risk Using Diabetes Related Indicators (2024).
+            <a href="https://doi.org/10.21203/rs.3.rs-4971115/v1" target="_blank" rel="noopener">DOI:10.21203/rs.3.rs-4971115/v1</a>
+          </li>
+
+          <li>
+            Mitigating the Opioid Epidemic: The Role of Cannabinoids in Chronic Pain Management (2024).
+            <a href="https://doi.org/10.1101/2024.07.14.24310378" target="_blank" rel="noopener">DOI:10.1101/2024.07.14.24310378</a>
+            <span class="muted small"> | </span>
+            <a href="https://doi.org/10.33140/JAPM.09.03.05" target="_blank" rel="noopener">DOI:10.33140/JAPM.09.03.05</a>
+          </li>
+
+          <li>
+            Trends in Sudden Cardiac Death in Pilots (2011 to 2023) (2024).
+            <a href="https://doi.org/10.1101/2024.06.29.24309708" target="_blank" rel="noopener">DOI:10.1101/2024.06.29.24309708</a>
+            <span class="muted small"> | </span>
+            <a href="https://doi.org/10.33140/IJPMC.02.02.04" target="_blank" rel="noopener">DOI:10.33140/IJPMC.02.02.04</a>
+          </li>
+
+          <li>
+            Artificial Intelligence in Pain Management: Advancing Translational Science in Digital Health Research from Bench to Bedside (2024).
+            <a href="https://doi.org/10.33140/AMLAI.05.03.04" target="_blank" rel="noopener">DOI:10.33140/AMLAI.05.03.04</a>
+          </li>
+
+          <li>
+            Emerging Digital Health Interventions Toward Cardiovascular Care: Key Insights for 2025 (2024).
+            <a href="https://doi.org/10.2139/ssrn.4981082" target="_blank" rel="noopener">DOI:10.2139/ssrn.4981082</a>
+          </li>
+
+          <li>
+            Erectile Dysfunction and Cardiovascular Disease Risk: Updated 2024 systematic review meta analysis (2024).
+            <a href="https://doi.org/10.21203/rs.3.rs-4681079/v1" target="_blank" rel="noopener">DOI:10.21203/rs.3.rs-4681079/v1</a>
+          </li>
+
+          <li>
+            Innovative E Health Technologies for Cardiovascular Disease Treatment: 2024 updated systematic review and meta analysis (2024).
+            <a href="https://doi.org/10.1101/2024.06.29.24309706" target="_blank" rel="noopener">DOI:10.1101/2024.06.29.24309706</a>
+          </li>
+
+          <li>
+            Major clinical outcomes and discussions of religiosity spirituality in patients with palliative care and nutrology therapy (2024).
+            <a href="https://doi.org/10.54448/IJN24409" target="_blank" rel="noopener">DOI:10.54448/IJN24409</a>
+          </li>
+
+          <li>
+            Precision Medicine in Cardiology: Biomarkers in coronary artery disease prevention, thematic review (2024).
+            <a href="https://doi.org/10.1101/2024.07.01.24309804" target="_blank" rel="noopener">DOI:10.1101/2024.07.01.24309804</a>
+            <span class="muted small"> | </span>
+            <a href="https://doi.org/10.26502/FCCM.92920395" target="_blank" rel="noopener">DOI:10.26502/FCCM.92920395</a>
+          </li>
+
+          <li>
+            The Inverse Association between Potassium Intake and Cardiovascular Disease Risk (2024).
+            <a href="https://doi.org/10.21203/RS.3.RS-4699824/V1" target="_blank" rel="noopener">DOI:10.21203/RS.3.RS-4699824/V1</a>
+          </li>
+
+          <li>
+            Thromboembolic Risk and Testosterone Replacement Therapy: Debunking myths and clarifying evidence (2024).
+            <a href="https://doi.org/10.21203/RS.3.RS-5134020/V1" target="_blank" rel="noopener">DOI:10.21203/RS.3.RS-5134020/V1</a>
+          </li>
+        </ul>
+
+        <p class="muted small" style="margin-bottom:0;">
+          Peer review activity (summary): PLOS Digital Health (36), European Journal of Preventive Cardiology (7), European Heart Journal (2), Diabetes and Metabolic Syndrome (2), Nature Reviews (1), Journal of Advances in Medicine and Medical Research (1).
+        </p>
+      </div>
+    </section>
+
+    <section class="section two-column">
+      <div>
+        <h2>Editorial Roles and Peer Review</h2>
+        <div class="card">
