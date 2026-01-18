@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -525,7 +524,7 @@
     </section>
 
     <section>
-      <h2>Selected Works and Research Outputs</h2>
+      <h2>Selected Publications and Research Artifacts</h2>
       <div class="card">
         <p class="muted small" style="margin-top:0;">
           This section is formatted for quick scanning by recruiters, collaborators, and review committees. Each link opens in a new tab.
