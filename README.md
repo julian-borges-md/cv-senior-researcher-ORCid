@@ -51,29 +51,25 @@
       border-bottom: 2px solid #e5e7eb;
       padding-bottom: 1rem;
       margin-bottom: 1.5rem;
-      align-items: stretch;
+      align-items: flex-start; /* FIX: top align both columns */
     }
 
     .header-left { flex: 1 1 640px; min-width: 320px; }
 
-    /* FIX: ensure the entire right column is left aligned consistently */
+    /* FIX: consistent left alignment + top align */
     .header-right {
       flex: 0 0 300px;
       min-width: 280px;
       text-align: left;
       font-size: 0.95rem;
-      align-self: flex-start;       /* top align vs stretching */
-      justify-self: start;
+      align-self: flex-start;
     }
-
-    .header-right * {
-      text-align: left !important;  /* hard enforce left alignment */
-    }
+    .header-right * { text-align: left; }
 
     .header-identity {
       display: flex;
       gap: 1rem;
-      align-items: stretch;
+      align-items: flex-start; /* FIX: prevent photo from stretching upward */
     }
 
     .header-identity-text {
@@ -82,18 +78,17 @@
       min-width: 0;
     }
 
+    /* FIX: predictable photo sizing + vertical alignment */
     .profile-photo {
-      width: auto;
-      height: 100%;
-      min-height: 176px;
-      max-height: 240px;
-      aspect-ratio: 3 / 4;
+      width: 168px;
+      height: 210px;
       object-fit: cover;
+      object-position: center 20%;
       border-radius: 0.75rem;
       border: 1px solid #e5e7eb;
       background: #ffffff;
       flex: 0 0 auto;
-      margin-top: 10px;
+      margin-top: 2px; /* slight nudge down, not "too high" */
     }
 
     .tagline {
@@ -108,6 +103,7 @@
       font-size: 0.95rem;
     }
 
+    /* FIX: badges align perfectly and wrap cleanly */
     .badge-row {
       display: flex;
       flex-wrap: wrap;
@@ -119,16 +115,18 @@
     .badge {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.45rem;
       background: #eef2ff;
       border: 1px solid #e0e7ff;
       border-radius: 999px;
-      padding: 0.25rem 0.75rem;
+      padding: 0.32rem 0.78rem; /* slightly more vertical balance */
       font-size: 0.85rem;
       color: #3730a3;
       text-decoration: none;
       white-space: nowrap;
       line-height: 1;
+      height: 32px; /* FIX: same height across all badges */
     }
 
     .badge-icon {
@@ -139,12 +137,51 @@
       flex: 0 0 auto;
     }
 
+    /* NEW: keywords block spacing + even distribution */
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pill-list.keywords {
+      margin-top: 2.25rem;          /* FIX: two-line separation below badges */
+      justify-content: flex-start;  /* left aligned */
+      align-items: flex-start;
+      gap: 0.6rem 0.6rem;           /* even spacing between pills */
+    }
+
+    .pill-list.keywords li {
+      background: #f9fafb;
+      border-radius: 999px;
+      padding: 0.28rem 0.8rem;
+      font-size: 0.85rem;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+      flex: 1 1 calc(33.333% - 0.6rem); /* evenly distributed */
+      min-width: 240px;
+      text-align: left;
+    }
+
+    @media (max-width: 980px) {
+      .header-right { flex: 1 1 320px; }
+      .pill-list.keywords li { flex: 1 1 calc(50% - 0.6rem); }
+    }
+
+    @media (max-width: 720px) {
+      .header-identity { flex-direction: column; }
+      .profile-photo { width: 160px; height: 200px; margin-top: 0; }
+      .pill-list.keywords li { flex: 1 1 100%; min-width: 0; }
+    }
+
     /* NEW: structured right column rows (label/value) */
     .info-block { margin-top: 0.25rem; }
-    .info-row { margin-top: 0.75rem; }
+    .info-row { margin-top: 0.85rem; }
     .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
     .info-value { margin-top: 0.15rem; }
-    .info-value .small { display: block; margin-top: 0.15rem; }
+    .info-value .small { display: block; margin-top: 0.2rem; }
 
     .card {
       border: 1px solid #e5e7eb;
@@ -167,38 +204,9 @@
       margin-top: 0.9rem;
     }
 
-    @media (max-width: 980px) {
-      .header-right { flex: 1 1 320px; }
-      .grid-3 { grid-template-columns: 1fr; }
-    }
-
     @media (max-width: 720px) {
       .grid-2 { grid-template-columns: 1fr; }
-      .header-identity { flex-direction: column; align-items: flex-start; }
-      .profile-photo {
-        width: 160px;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin-top: 0;
-      }
-    }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.75rem 0 0;
-      padding: 0;
-      list-style: none;
-    }
-    .pill-list li {
-      background: #f9fafb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #111827;
-      border: 1px solid #e5e7eb;
+      .grid-3 { grid-template-columns: 1fr; }
     }
 
     .item { margin-bottom: 1rem; }
@@ -276,6 +284,7 @@
     <header class="header">
       <div class="header-left">
         <div class="header-identity">
+          <!-- Put your image at: assets/profile.jpg -->
           <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
 
           <div class="header-identity-text">
@@ -296,6 +305,7 @@
                 <svg class="badge-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.476-.9 1.637-1.85 3.368-1.85 3.6 0 4.266 2.368 4.266 5.455v6.286zM5.337 7.433A2.062 2.062 0 0 1 3.27 5.37c0-1.14.925-2.067 2.067-2.067 1.141 0 2.066.926 2.066 2.067 0 1.141-.925 2.063-2.066 2.063zM6.814 20.452H3.861V9h2.953v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
+                LinkedIn
               </a>
 
               <a class="badge" href="https://github.com/julian-borges-md" target="_blank" rel="noopener">GitHub</a>
@@ -304,12 +314,14 @@
                 <svg class="badge-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path fill="currentColor" d="M18.9 2H22l-6.8 7.8L23.2 22h-6.7l-5.2-6.5L5.7 22H2.6l7.4-8.5L1 2h6.8l4.7 6.1L18.9 2zm-1.2 18h1.7L7.1 3.9H5.3L17.7 20z"></path>
                 </svg>
+                X
               </a>
 
               <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
             </div>
 
-            <ul class="pill-list" aria-label="Keywords">
+            <!-- FIXED: keywords block is now spaced, left aligned, and evenly distributed -->
+            <ul class="pill-list keywords" aria-label="Keywords">
               <li>Artificial intelligence and Machine Learning</li>
               <li>Digital Transformations and Digital Health</li>
               <li>Cardio Endocrinology</li>
@@ -322,7 +334,6 @@
         </div>
       </div>
 
-      <!-- UPDATED: aligned left (label/value blocks) -->
       <div class="header-right" aria-label="Contact and identifiers">
         <div class="info-block">
           <div class="info-row">
@@ -359,8 +370,6 @@
           </div>
         </div>
       </div>
-      <!-- END UPDATED -->
-
     </header>
 
     <section>
@@ -422,13 +431,13 @@
           <div class="subheading">Graduate and Certificate Training</div>
           <ul>
             <li>Boston University | MS Health Informatics (Data Analytics) candidate | 2025 to 2027</li>
-            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT)| 2024 to 2025</li>
+            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT) | 2024 to 2025</li>
             <li>UC San Diego | Drug discovery, development, and product management specialization | 2025</li>
             <li>Northeastern University | Health informatics for healthcare professionals certificate | 2025</li>
             <li>Johns Hopkins | Clinical informatics specialization | 2025</li>
             <li>Johns Hopkins | Bioinformatics, Python for genomic data science certificate | 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP)| 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR)| 2024</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP) | 2025</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR) | 2024</li>
             <li>HarvardX via edX | AI and machine learning with R and Python, statistics and R, Python for research | 2024</li>
             <li>Pontifícia Universidade Católica de Goiás | Medical genetics masters program | 2015 to 2016</li>
           </ul>
@@ -437,9 +446,9 @@
         <div class="card">
           <div class="subheading">Medical Training and Board Certification</div>
           <ul>
-            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine MD | 1996 to 2002</li>
+            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine (MD) | 1996 to 2002</li>
             <li>Endocrinology, diabetes and metabolism | Board certification (SBEM/CFM/AMB) | 2014</li>
-            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB)| 2013 to 2014</li>
+            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB) | 2013 to 2014</li>
             <li>Nutrology fellowship | 2012 to 2013</li>
             <li>Endocrinology fellowship | 2011 to 2013</li>
             <li>Medical biochemistry postgraduate program | 2006 to 2008</li>
@@ -479,125 +488,105 @@
         </p>
 
         <ul>
+          <!-- Your publications list unchanged -->
           <li>
             Auditing Shortcut Learning and Misclassification in AI Based Breast Cancer Genomic Subtyping (2026).
             <a href="https://doi.org/10.1093/jamiaopen/ooaf177" target="_blank" rel="noopener">DOI:10.1093/jamiaopen/ooaf177</a>
             <span class="muted small"> | Harvard Dataverse: </span>
             <a href="https://doi.org/10.7910/dvn/baljnt" target="_blank" rel="noopener">DOI:10.7910/dvn/baljnt</a>
           </li>
-
           <li>
             Multi Arm Bandit Governance for Clinical AI (software, Zenodo, 2026).
             <a href="https://doi.org/10.5281/zenodo.18248285" target="_blank" rel="noopener">DOI:10.5281/zenodo.18248285</a>
           </li>
-
           <li>
             Functional Foods and Nutraceuticals: Definitions and Health Benefits (book, 2025).
             <a href="https://doi.org/10.54448/MSP.978-65-983826-2-9" target="_blank" rel="noopener">DOI:10.54448/MSP.978-65-983826-2-9</a>
           </li>
-
           <li>
             Advancing Deep Learning Insights for Identifying Heart Disease in Diabetic Patients: A Data Mining Approach Using Logistic Regression and Random Forests (SSRN, 2025).
             <a href="https://doi.org/10.2139/ssrn.5091734" target="_blank" rel="noopener">DOI:10.2139/ssrn.5091734</a>
           </li>
-
           <li>
             Impact of Renal Function and Symptom Burden on Digoxin Efficacy and Safety: A Post Hoc Subgroup Analysis of the DIG Trial (Harvard Dataverse, dataset, 2025).
             <a href="https://doi.org/10.7910/dvn/zhyhy5" target="_blank" rel="noopener">DOI:10.7910/dvn/zhyhy5</a>
           </li>
-
           <li>
             Neuroplasticity Alterations Induced by Isotretinoin Use in RARA Gene Polymorphism is Associated with Increased Risk of Depression and Suicidal Ideation (systematic review and meta analysis, 2024).
             <a href="https://doi.org/10.47363/JPSRR/2024(6)173" target="_blank" rel="noopener">DOI:10.47363/JPSRR/2024(6)173</a>
           </li>
-
           <li>
             Oral Testosterone Therapy in Hypogonadal Men: A Comprehensive Systematic Review and Meta Analysis (2024).
             <a href="https://doi.org/10.1101/2024.09.22.24314162" target="_blank" rel="noopener">DOI:10.1101/2024.09.22.24314162</a>
             <span class="muted small"> | </span>
             <a href="https://doi.org/10.54178/jsedmv6i3001" target="_blank" rel="noopener">DOI:10.54178/jsedmv6i3001</a>
           </li>
-
           <li>
             Translational Cardiology: Coenzyme Q10 Role as a Potential Therapeutic Agent for Cardiovascular Disease (2024).
             <a href="https://doi.org/10.33140/tmoa.02.01.04" target="_blank" rel="noopener">DOI:10.33140/tmoa.02.01.04</a>
           </li>
-
           <li>
             The Inverse Association between Testosterone Replacement Therapy and Cardiovascular Disease Risk (2024).
             <a href="https://doi.org/10.1101/2024.06.21.24309326" target="_blank" rel="noopener">DOI:10.1101/2024.06.21.24309326</a>
             <span class="muted small"> | </span>
             <a href="https://doi.org/10.31579/2834-796x/073" target="_blank" rel="noopener">DOI:10.31579/2834-796x/073</a>
           </li>
-
           <li>
             Challenging the Salt Paradigm: Dietary Sodium Impact on Cardiovascular Risk (2024).
             <a href="https://doi.org/10.34297/AJBSR.2024.23.003132" target="_blank" rel="noopener">DOI:10.34297/AJBSR.2024.23.003132</a>
           </li>
-
           <li>
             Erectile Dysfunction as a Novel Biomarker for Cardiometabolic Vascular Disease Risk in the Aging Male (2024).
             <a href="https://doi.org/10.1101/2024.07.06.24310031" target="_blank" rel="noopener">DOI:10.1101/2024.07.06.24310031</a>
             <span class="muted small"> | </span>
             <a href="https://doi.org/10.33140/ajun.06.01.06" target="_blank" rel="noopener">DOI:10.33140/ajun.06.01.06</a>
           </li>
-
           <li>
             A Machine Learning Framework for Early Detection of Cardiovascular Risk Using Diabetes Related Indicators (2024).
             <a href="https://doi.org/10.21203/rs.3.rs-4971115/v1" target="_blank" rel="noopener">DOI:10.21203/rs.3.rs-4971115/v1</a>
           </li>
-
           <li>
             Mitigating the Opioid Epidemic: The Role of Cannabinoids in Chronic Pain Management (2024).
             <a href="https://doi.org/10.1101/2024.07.14.24310378" target="_blank" rel="noopener">DOI:10.1101/2024.07.14.24310378</a>
             <span class="muted small"> | </span>
             <a href="https://doi.org/10.33140/JAPM.09.03.05" target="_blank" rel="noopener">DOI:10.33140/JAPM.09.03.05</a>
           </li>
-
           <li>
             Trends in Sudden Cardiac Death in Pilots (2011 to 2023) (2024).
             <a href="https://doi.org/10.1101/2024.06.29.24309708" target="_blank" rel="noopener">DOI:10.1101/2024.06.29.24309708</a>
             <span class="muted small"> | </span>
             <a href="https://doi.org/10.33140/IJPMC.02.02.04" target="_blank" rel="noopener">DOI:10.33140/IJPMC.02.02.04</a>
           </li>
-
           <li>
             Artificial Intelligence in Pain Management: Advancing Translational Science in Digital Health Research from Bench to Bedside (2024).
             <a href="https://doi.org/10.33140/AMLAI.05.03.04" target="_blank" rel="noopener">DOI:10.33140/AMLAI.05.03.04</a>
           </li>
-
           <li>
             Emerging Digital Health Interventions Toward Cardiovascular Care: Key Insights for 2025 (2024).
             <a href="https://doi.org/10.2139/ssrn.4981082" target="_blank" rel="noopener">DOI:10.2139/ssrn.4981082</a>
           </li>
-
           <li>
             Erectile Dysfunction and Cardiovascular Disease Risk: Updated 2024 systematic review meta analysis (2024).
             <a href="https://doi.org/10.21203/rs.3.rs-4681079/v1" target="_blank" rel="noopener">DOI:10.21203/rs.3.rs-4681079/v1</a>
           </li>
-
           <li>
             Innovative E Health Technologies for Cardiovascular Disease Treatment: 2024 updated systematic review and meta analysis (2024).
             <a href="https://doi.org/10.1101/2024.06.29.24309706" target="_blank" rel="noopener">DOI:10.1101/2024.06.29.24309706</a>
           </li>
-
           <li>
             Major clinical outcomes and discussions of religiosity spirituality in patients with palliative care and nutrology therapy (2024).
             <a href="https://doi.org/10.54448/IJN24409" target="_blank" rel="noopener">DOI:10.54448/IJN24409</a>
           </li>
-
           <li>
             Precision Medicine in Cardiology: Biomarkers in coronary artery disease prevention, thematic review (2024).
             <a href="https://doi.org/10.1101/2024.07.01.24309804" target="_blank" rel="noopener">DOI:10.1101/2024.07.01.24309804</a>
             <span class="muted small"> | </span>
             <a href="https://doi.org/10.26502/FCCM.92920395" target="_blank" rel="noopener">DOI:10.26502/FCCM.92920395</a>
           </li>
-
           <li>
             The Inverse Association between Potassium Intake and Cardiovascular Disease Risk (2024).
             <a href="https://doi.org/10.21203/RS.3.RS-4699824/V1" target="_blank" rel="noopener">DOI:10.21203/RS.3.RS-4699824/V1</a>
           </li>
-
           <li>
             Thromboembolic Risk and Testosterone Replacement Therapy: Debunking myths and clarifying evidence (2024).
             <a href="https://doi.org/10.21203/RS.3.RS-5134020/V1" target="_blank" rel="noopener">DOI:10.21203/RS.3.RS-5134020/V1</a>
@@ -623,7 +612,7 @@
 
           <div class="subheading">Peer Review</div>
           <p class="small">
-            Reviewer for journals including PLOS Digital Health, European Heart Journal Digital Health, NaTure Reviews and European Journal of Preventive Cardiology, focused on clinical research rigor, digital health translation, and clinical analytics integrity.
+            Reviewer for journals including PLOS Digital Health, European Heart Journal Digital Health, Nature Reviews and European Journal of Preventive Cardiology, focused on clinical research rigor, digital health translation, and clinical analytics integrity.
           </p>
         </div>
       </div>
