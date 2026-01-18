@@ -55,7 +55,20 @@
     }
 
     .header-left { flex: 1 1 640px; min-width: 320px; }
-    .header-right { flex: 0 0 300px; min-width: 280px; text-align: left; font-size: 0.95rem; }
+
+    /* FIX: ensure the entire right column is left aligned consistently */
+    .header-right {
+      flex: 0 0 300px;
+      min-width: 280px;
+      text-align: left;
+      font-size: 0.95rem;
+      align-self: flex-start;       /* top align vs stretching */
+      justify-self: start;
+    }
+
+    .header-right * {
+      text-align: left !important;  /* hard enforce left alignment */
+    }
 
     .header-identity {
       display: flex;
@@ -80,7 +93,7 @@
       border: 1px solid #e5e7eb;
       background: #ffffff;
       flex: 0 0 auto;
-      margin-top: 10px; /* pulls the photo down slightly */
+      margin-top: 10px;
     }
 
     .tagline {
@@ -115,6 +128,7 @@
       color: #3730a3;
       text-decoration: none;
       white-space: nowrap;
+      line-height: 1;
     }
 
     .badge-icon {
@@ -122,7 +136,15 @@
       height: 0.95rem;
       display: inline-block;
       vertical-align: middle;
+      flex: 0 0 auto;
     }
+
+    /* NEW: structured right column rows (label/value) */
+    .info-block { margin-top: 0.25rem; }
+    .info-row { margin-top: 0.75rem; }
+    .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
+    .info-value { margin-top: 0.15rem; }
+    .info-value .small { display: block; margin-top: 0.15rem; }
 
     .card {
       border: 1px solid #e5e7eb;
@@ -193,7 +215,6 @@
     ul { margin-top: 0.4rem; padding-left: 1.1rem; }
     li { margin-bottom: 0.35rem; }
 
-    /* Link animation */
     a { color: #2563eb; text-decoration: none; }
     a, .badge {
       transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, opacity 160ms ease;
@@ -220,11 +241,6 @@
     @media (prefers-reduced-motion: reduce) {
       a, .badge { transition: none !important; }
       a:hover, .badge:hover { transform: none !important; box-shadow: none !important; }
-    }
-
-    .code-link {
-      font-family: ui-monospace, SFMonoRegular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 0.9rem;
     }
 
     .kpi {
@@ -260,13 +276,12 @@
     <header class="header">
       <div class="header-left">
         <div class="header-identity">
-          <!-- Place your photo here in your repo: assets/profile.jpg -->
           <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
 
           <div class="header-identity-text">
             <h1>Julian Y. V. Borges, MD, MS</h1>
             <div class="tagline">Clinician Scientist | Clinical Informatics | Responsible Clinical AI | Genomics</div>
-            <div class="tertiary">Clinical Research · Informatics · AI Governance</div>
+            <div class="tertiary">Clinical Research · Medical Informatics · AI Governance</div>
 
             <p class="muted small">
               I connect clinical medicine, artificial intelligence, and genomic science to build data driven systems that advance precision endocrinology and enable safer,
@@ -275,20 +290,15 @@
             </p>
 
             <div class="badge-row" aria-label="Key identity links">
-              <a class="badge" href="https://orcid.org/0009-0001-9929-3135" target="_blank" rel="noopener">
-                ORCID
-              </a>
+              <a class="badge" href="https://orcid.org/0009-0001-9929-3135" target="_blank" rel="noopener">ORCID</a>
 
               <a class="badge" href="https://www.linkedin.com/in/julian-borges-md/" target="_blank" rel="noopener" aria-label="LinkedIn">
                 <svg class="badge-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.476-.9 1.637-1.85 3.368-1.85 3.6 0 4.266 2.368 4.266 5.455v6.286zM5.337 7.433A2.062 2.062 0 0 1 3.27 5.37c0-1.14.925-2.067 2.067-2.067 1.141 0 2.066.926 2.066 2.067 0 1.141-.925 2.063-2.066 2.063zM6.814 20.452H3.861V9h2.953v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
-                in/julian-borges-md
               </a>
 
-              <a class="badge" href="https://github.com/julian-borges-md" target="_blank" rel="noopener">
-                GitHub
-              </a>
+              <a class="badge" href="https://github.com/julian-borges-md" target="_blank" rel="noopener">GitHub</a>
 
               <a class="badge" href="https://x.com/julianborgesmd" target="_blank" rel="noopener" aria-label="X">
                 <svg class="badge-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -296,41 +306,13 @@
                 </svg>
               </a>
 
-              <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">
-                Harvard Dataverse
-              </a>
+              <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
             </div>
 
-      <div class="header-right" aria-label="Contact and identifiers">
-        <div class="muted small">Countries</div>
-        <div>United States, Brazil</div>
-
-        <div class="muted small" style="margin-top:0.75rem;">Primary email</div>
-        <div><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
-
-        <div class="muted small" style="margin-top:0.75rem;">Other IDs</div>
-        <div class="small">
-          Scopus Author ID:
-          <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
-        </div>
-        <div class="small">
-          SciProfiles:
-          <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
-        </div>
-        <div class="small">
-          ResearcherID:
-          <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
-        </div>
-
-        <div class="muted small" style="margin-top:0.75rem;">Core methods and tooling</div>
-        <div class="small">Python, R, Stata, SQL</div>
-      </div>
-    </header>
-    
             <ul class="pill-list" aria-label="Keywords">
-              <li>Emerging Technologies</li>
-              <li>Digital Health</li>
-              <li>Cardiovascular Disease</li>
+              <li>Artificial intelligence and Machine Learning</li>
+              <li>Digital Transformations and Digital Health</li>
+              <li>Cardio Endocrinology</li>
               <li>Molecular Endocrinology</li>
               <li>Circulatory Physiology</li>
               <li>Endothelial Dysfunction</li>
@@ -339,12 +321,53 @@
           </div>
         </div>
       </div>
-      
+
+      <!-- UPDATED: aligned left (label/value blocks) -->
+      <div class="header-right" aria-label="Contact and identifiers">
+        <div class="info-block">
+          <div class="info-row">
+            <div class="info-label">Countries</div>
+            <div class="info-value">United States, Brazil</div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Primary email</div>
+            <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Other IDs</div>
+            <div class="info-value">
+              <div class="small">
+                Scopus Author ID:
+                <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
+              </div>
+              <div class="small">
+                SciProfiles:
+                <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
+              </div>
+              <div class="small">
+                ResearcherID:
+                <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-label">Core methods and tooling</div>
+            <div class="info-value">Python, R, Stata, SQL</div>
+          </div>
+        </div>
+      </div>
+      <!-- END UPDATED -->
+
+    </header>
+
     <section>
       <h2>Research and Leadership Summary</h2>
       <div class="card">
         <p>
-          I am a clinician scientist and endocrinologist with more than 20 years of experience at the intersection of medicine, data science, and translational research.
+          I am a clinician scientist and endocrinologist with more than 23 years of experience at the intersection of medicine, data science, and translational research.
           As Founder and CEO of FXMEDUS LLC, I lead initiatives integrating health informatics, computational biology, and artificial intelligence to design scalable solutions
           for metabolic and aging related diseases. Flagship platforms such as MitoCoreX and DrugSynthAI apply multi agent architectures, reinforcement learning, and in silico
           experimentation for compound generation, biomarker discovery, and mitochondrial therapeutics research.
@@ -396,27 +419,27 @@
       <h2>Education and Qualifications</h2>
       <div class="grid-2">
         <div class="card">
-          <div class="subheading">Graduate and certificate training</div>
+          <div class="subheading">Graduate and Certificate Training</div>
           <ul>
             <li>Boston University | MS Health Informatics (Data Analytics) candidate | 2025 to 2027</li>
-            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective | 2024 to 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Research | 2024</li>
-            <li>NIH OCRECO | Principles of Clinical Pharmacology | 2025</li>
+            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT)| 2024 to 2025</li>
             <li>UC San Diego | Drug discovery, development, and product management specialization | 2025</li>
             <li>Northeastern University | Health informatics for healthcare professionals certificate | 2025</li>
             <li>Johns Hopkins | Clinical informatics specialization | 2025</li>
             <li>Johns Hopkins | Bioinformatics, Python for genomic data science certificate | 2025</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP)| 2025</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR)| 2024</li>
             <li>HarvardX via edX | AI and machine learning with R and Python, statistics and R, Python for research | 2024</li>
             <li>Pontifícia Universidade Católica de Goiás | Medical genetics masters program | 2015 to 2016</li>
           </ul>
         </div>
 
         <div class="card">
-          <div class="subheading">Medical training and board certification</div>
+          <div class="subheading">Medical Training and Board Certification</div>
           <ul>
-            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine | 1996 to 2002</li>
-            <li>Endocrinology, diabetes and metabolism | Board certification | 2014</li>
-            <li>Clinical nutrition and nutrology | Board certification | 2013 to 2014</li>
+            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine MD | 1996 to 2002</li>
+            <li>Endocrinology, diabetes and metabolism | Board certification (SBEM/CFM/AMB) | 2014</li>
+            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB)| 2013 to 2014</li>
             <li>Nutrology fellowship | 2012 to 2013</li>
             <li>Endocrinology fellowship | 2011 to 2013</li>
             <li>Medical biochemistry postgraduate program | 2006 to 2008</li>
@@ -582,12 +605,11 @@
         </ul>
 
         <p class="muted small" style="margin-bottom:0;">
-          Peer review activity (summary): PLOS Digital Health (33), European Journal of Preventive Cardiology (7), European Heart Journal (2), Diabetes and Metabolic Syndrome (2), Nature Reviews (1), Journal of Advances in Medicine and Medical Research (1).
+          Peer review activity (summary): PLOS Digital Health (36), European Journal of Preventive Cardiology (7), European Heart Journal (2), Diabetes and Metabolic Syndrome (2), Nature Reviews (1), Journal of Advances in Medicine and Medical Research (1).
         </p>
       </div>
     </section>
 
-    
     <section class="section two-column">
       <div>
         <h2>Editorial Roles and Peer Review</h2>
@@ -628,16 +650,16 @@
       <h2>Professional Affiliations</h2>
       <div class="card">
         <ul>
-          <li>American Medical Informatics Association</li>
-          <li>American Medical Association</li>
+          <li>American Medical Informatics Association (AMIA)</li>
+          <li>American Medical Association (AMA)</li>
           <li>Endocrine Society</li>
-          <li>American Society for Nutrition</li>
-          <li>American College of Sports Medicine</li>
-          <li>American Physician Scientists Association</li>
-          <li>American College of Physicians</li>
-          <li>Brazilian Society of Endocrinology and Metabolism</li>
-          <li>Brazilian Medical Nutrition Association</li>
-          <li>Brazilian Society of Sports Medicine</li>
+          <li>American Society for Nutrition (ASN)</li>
+          <li>American College of Sports Medicine (ACSM)</li>
+          <li>American Physician Scientists Association (APSA)</li>
+          <li>American College of Physicians (ACP)</li>
+          <li>Brazilian Society of Endocrinology and Metabolism (SBEM)</li>
+          <li>Brazilian Medical Nutrition Association (ABRAN)</li>
+          <li>Brazilian Society of Sports Medicine (SBME)</li>
         </ul>
       </div>
     </section>
