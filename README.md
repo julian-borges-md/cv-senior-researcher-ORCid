@@ -588,19 +588,83 @@
       </div>
     </section>
 
-    <section>
-      <h2>How to use this page in GitHub Pages</h2>
+    
+    <section class="section two-column">
+      <div>
+        <h2>Editorial Roles and Peer Review</h2>
+        <div class="card">
+          <div class="subheading">Editorial Roles</div>
+          <ul>
+            <li>Academic Editor, PLOS Digital Health</li>
+            <li>Editorial Board Member, International Journal of Diabetes and Endocrinology</li>
+            <li>Editorial Board Member, International Journal of Epidemiology and Public Health Research</li>
+          </ul>
+
+          <div class="subheading">Peer Review</div>
+          <p class="small">
+            Reviewer for journals including PLOS Digital Health, European Heart Journal Digital Health, NaTure Reviews and European Journal of Preventive Cardiology, focused on clinical research rigor, digital health translation, and clinical analytics integrity.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h2>Research Portfolio Themes</h2>
+        <div class="card">
+          <ul>
+            <li>Clinical research infrastructure and governance models enabling safe translation to care</li>
+            <li>Clinical AI governance, auditability, and deployment safety in real clinical environments</li>
+            <li>Applied analytics for cardiometabolic risk stratification and outcomes measurement</li>
+            <li>Genomic epidemiology and bioinformatics for translational inference and precision prevention</li>
+          </ul>
+
+          <div class="subheading">MitoCoreX Project, Principal Investigator</div>
+          <p class="small">
+            AI enabled discovery and development platform designed to optimize mitochondrial function through genomics aware targeting, multi agent systems, and in silico validation for aging related disease, neurodegeneration, and metabolic performance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Professional Affiliations</h2>
       <div class="card">
         <ul>
-          <li>Save this file as <span class="code-link">index.html</span> in the repository root.</li>
-          <li>Put your photo at <span class="code-link">assets/profile.jpg</span>.</li>
-          <li>In GitHub: Settings, Pages, Build and deployment, set Source to Deploy from a branch, choose main and root.</li>
+          <li>American Medical Informatics Association</li>
+          <li>American Medical Association</li>
+          <li>Endocrine Society</li>
+          <li>American Society for Nutrition</li>
+          <li>American College of Sports Medicine</li>
+          <li>American Physician Scientists Association</li>
+          <li>American College of Physicians</li>
+          <li>Brazilian Society of Endocrinology and Metabolism</li>
+          <li>Brazilian Medical Nutrition Association</li>
+          <li>Brazilian Society of Sports Medicine</li>
         </ul>
-        <p class="muted small" style="margin-bottom:0;">
-          If you previously relied on README rendering, switching to index.html is the most reliable way to ensure the site opens as true HTML.
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Clinical Imaging Training</h2>
+      <div class="card">
+        <p class="small">
+          Completed structured programs in obstetric, transvaginal, internal medicine, and musculoskeletal ultrasound at FÉRTILE Diagnósticos,
+          an accredited SBUS teaching center in Goiânia, Brazil, including more than three hundred hours of theoretical and hands on training across obstetric,
+          gynecologic, abdominal, and musculoskeletal imaging.
         </p>
       </div>
     </section>
+
+    <section class="section">
+      <h2>Contact and Executive Collaboration</h2>
+      <div class="card">
+        <p><strong>Email:</strong> <a href="mailto:jyborges@bu.edu">jyborges@bu.edu</a></p>
+        <p><strong>Phone:</strong> +1 617 895 8403</p>
+        <p class="muted small">
+          Open to full time senior clinical research leadership roles focused on clinical trial expansion, translational infrastructure, investigator enablement, and research enterprise growth across Northern New England.
+        </p>
+      </div>
+    </section>
+
   </main>
 </body>
 </html>
