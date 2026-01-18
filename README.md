@@ -54,43 +54,37 @@
       align-items: stretch;
     }
 
-    .header-left { flex: 1 1 640px; min-width: 320px; }
+    .header-left { flex: 1 1 100%; min-width: 320px; }
 
-    .header-right {
-      flex: 0 0 300px;
-      min-width: 280px;
-      text-align: left;
-      font-size: 0.95rem;
-      align-self: flex-start;
-      justify-self: start;
-    }
-
-    .header-right * { text-align: left !important; }
-
+    /* NEW: left locked photo + contact, right flexible content (badges + pills) */
     .header-identity {
-      display: flex;
-      gap: 1rem;
-      align-items: stretch;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 1.25rem;
+      align-items: start;
     }
 
-    .header-identity-text {
+    .header-side {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+
+    .header-main {
       display: flex;
       flex-direction: column;
       min-width: 0;
-      flex: 1 1 auto;
     }
 
     .profile-photo {
-      width: auto;
-      height: 100%;
-      min-height: 176px;
-      max-height: 240px;
+      width: 100%;
+      height: auto;
       aspect-ratio: 3 / 4;
       object-fit: cover;
       border-radius: 0.75rem;
       border: 1px solid #e5e7eb;
       background: #ffffff;
-      flex: 0 0 auto;
       margin-top: 10px;
     }
 
@@ -137,51 +131,21 @@
       flex: 0 0 auto;
     }
 
-    /* Right column blocks */
-    .info-block { margin-top: 0.25rem; }
+    /* Contact block (locked under photo, left column) */
+    .info-block {
+      width: 100%;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.85rem;
+      background: #ffffff;
+    }
+
     .info-row { margin-top: 0.75rem; }
+    .info-row:first-child { margin-top: 0; }
     .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
     .info-value { margin-top: 0.15rem; }
     .info-value .small { display: block; margin-top: 0.15rem; }
-
-    /* NEW: pills block that lives on the right side of the header */
-    .header-meta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
-      align-items: start;
-    }
-
-    /* Keep contact info visually on the LEFT within this meta grid */
-    .meta-left { min-width: 0; }
-
-    /* Pills on the RIGHT within this meta grid */
-    .meta-right { min-width: 0; }
-
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0;              /* controlled by grid spacing */
-      padding: 0;
-      list-style: none;
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-
-    .pill-list li {
-      background: #f9fafb;
-      border-radius: 999px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.85rem;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-      flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-      text-align: left;
-    }
+    .info-block * { text-align: left !important; }
 
     .card {
       border: 1px solid #e5e7eb;
@@ -197,22 +161,67 @@
       margin-top: 0.9rem;
     }
 
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
     @media (max-width: 980px) {
-      .header-right { flex: 1 1 320px; }
-      .header-meta-grid { grid-template-columns: 1fr; }
-      .meta-right { margin-top: 0.5rem; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .header-identity {
+        grid-template-columns: 1fr;
+      }
+      .header-side {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .profile-photo {
+        width: 180px;
+        margin-top: 0;
+      }
+      .info-block {
+        flex: 1 1 auto;
+      }
     }
 
     @media (max-width: 720px) {
       .grid-2 { grid-template-columns: 1fr; }
-      .header-identity { flex-direction: column; align-items: flex-start; }
-      .profile-photo {
-        width: 160px;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin-top: 0;
-      }
+      .header-side { flex-direction: column; }
+      .profile-photo { width: 180px; }
+    }
+
+    /* Pills: right column, full width to the right edge, no stretching beyond text */
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+
+      width: 100%;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .pill-list li {
+      background: #f9fafb;
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.85rem;
+      color: #111827;
+      border: 1px solid #e5e7eb;
+
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+      text-align: left;
     }
 
     .item { margin-bottom: 1rem; }
@@ -281,6 +290,7 @@
       a { color: #111827; text-decoration: none; }
       .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
       .kpi { background: #ffffff; }
+      .info-block { border: 1px solid #d1d5db; }
     }
   </style>
 </head>
@@ -290,9 +300,48 @@
     <header class="header">
       <div class="header-left">
         <div class="header-identity">
-          <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
+          <!-- LEFT LOCKED COLUMN -->
+          <div class="header-side">
+            <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
 
-          <div class="header-identity-text">
+            <div class="info-block" aria-label="Contact and identifiers">
+              <div class="info-row">
+                <div class="info-label">Countries</div>
+                <div class="info-value">United States, Brazil</div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Primary email</div>
+                <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Other IDs</div>
+                <div class="info-value">
+                  <div class="small">
+                    Scopus Author ID:
+                    <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
+                  </div>
+                  <div class="small">
+                    SciProfiles:
+                    <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
+                  </div>
+                  <div class="small">
+                    ResearcherID:
+                    <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="info-row">
+                <div class="info-label">Core methods and tooling</div>
+                <div class="info-value">Python, R, Stata, SQL</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT FLEX COLUMN (fills full space to right edge) -->
+          <div class="header-main">
             <h1>Julian Y. V. Borges, MD, MS</h1>
             <div class="tagline">Clinician Scientist | Clinical Informatics | Responsible Clinical AI | Genomics</div>
             <div class="tertiary">Clinical Research · Medical Informatics · AI Governance</div>
@@ -323,74 +372,22 @@
               <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
             </div>
 
-            <!-- NEW: contact info stays on the LEFT (within this block), pills go to the RIGHT -->
-            <div class="header-meta-grid" aria-label="Contact info and keywords">
-              <div class="meta-left">
-                <div class="card" style="padding:0.9rem;">
-                  <div class="info-block">
-                    <div class="info-row" style="margin-top:0;">
-                      <div class="info-label">Countries</div>
-                      <div class="info-value">United States, Brazil</div>
-                    </div>
-
-                    <div class="info-row">
-                      <div class="info-label">Primary email</div>
-                      <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
-                    </div>
-
-                    <div class="info-row">
-                      <div class="info-label">Other IDs</div>
-                      <div class="info-value">
-                        <div class="small">
-                          Scopus Author ID:
-                          <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
-                        </div>
-                        <div class="small">
-                          SciProfiles:
-                          <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
-                        </div>
-                        <div class="small">
-                          ResearcherID:
-                          <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="info-row">
-                      <div class="info-label">Core methods and tooling</div>
-                      <div class="info-value">Python, R, Stata, SQL</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="meta-right">
-                <div class="card" style="padding:0.9rem;">
-                  <div class="info-label" style="margin-top:0;">Keywords</div>
-                  <ul class="pill-list" aria-label="Keywords" style="margin-top:0.5rem;">
-                    <li>Artificial Intelligence</li>
-                    <li>Machine Learning</li>
-                    <li>Deep Learning</li>
-                    <li>AI Governance</li>
-                    <li>Digital Transformations</li>
-                    <li>Digital Health</li>
-                    <li>Cardio Endocrinology</li>
-                    <li>Molecular Endocrinology</li>
-                    <li>Circulatory Physiology</li>
-                    <li>Endothelial Dysfunction</li>
-                    <li>Vasculature Pathophysiology</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- END NEW -->
-
+            <ul class="pill-list" aria-label="Keywords">
+              <li>Artificial Intelligence</li>
+              <li>Machine Learning</li>
+              <li>Deep Learning</li>
+              <li>AI Governance</li>
+              <li>Digital Transformations</li>
+              <li>Digital Health</li>
+              <li>Cardio Endocrinology</li>
+              <li>Molecular Endocrinology</li>
+              <li>Circulatory Physiology</li>
+              <li>Endothelial Dysfunction</li>
+              <li>Vasculature Pathophysiology</li>
+            </ul>
           </div>
         </div>
       </div>
-
-      <!-- Keep this right column available for future content; currently empty by design -->
-      <div class="header-right" aria-label="Right column"></div>
     </header>
 
     <section>
@@ -644,3 +641,78 @@
       <div>
         <h2>Editorial Roles and Peer Review</h2>
         <div class="card">
+          <div class="subheading">Editorial Roles</div>
+          <ul>
+            <li>Academic Editor, PLOS Digital Health</li>
+            <li>Editorial Board Member, International Journal of Diabetes and Endocrinology</li>
+            <li>Editorial Board Member, International Journal of Epidemiology and Public Health Research</li>
+          </ul>
+
+          <div class="subheading">Peer Review</div>
+          <p class="small">
+            Reviewer for journals including PLOS Digital Health, European Heart Journal Digital Health, NaTure Reviews and European Journal of Preventive Cardiology, focused on clinical research rigor, digital health translation, and clinical analytics integrity.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <h2>Research Portfolio Themes</h2>
+        <div class="card">
+          <ul>
+            <li>Clinical research infrastructure and governance models enabling safe translation to care</li>
+            <li>Clinical AI governance, auditability, and deployment safety in real clinical environments</li>
+            <li>Applied analytics for cardiometabolic risk stratification and outcomes measurement</li>
+            <li>Genomic epidemiology and bioinformatics for translational inference and precision prevention</li>
+          </ul>
+
+          <div class="subheading">MitoCoreX Project, Principal Investigator</div>
+          <p class="small">
+            AI enabled discovery and development platform designed to optimize mitochondrial function through genomics aware targeting, multi agent systems, reinforcement learning, and in silico validation for aging related disease, neurodegeneration, and metabolic performance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Professional Affiliations</h2>
+      <div class="card">
+        <ul>
+          <li>American Medical Informatics Association (AMIA)</li>
+          <li>American Medical Association (AMA)</li>
+          <li>Endocrine Society</li>
+          <li>American Society for Nutrition (ASN)</li>
+          <li>American College of Sports Medicine (ACSM)</li>
+          <li>American Physician Scientists Association (APSA)</li>
+          <li>American College of Physicians (ACP)</li>
+          <li>Brazilian Society of Endocrinology and Metabolism (SBEM)</li>
+          <li>Brazilian Medical Nutrition Association (ABRAN)</li>
+          <li>Brazilian Society of Sports Medicine (SBME)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Clinical Imaging Training</h2>
+      <div class="card">
+        <p class="small">
+          Completed structured programs in obstetric, transvaginal, internal medicine, and musculoskeletal ultrasound at FÉRTILE Diagnósticos,
+          an accredited SBUS teaching center in Goiânia, Brazil, including more than three hundred hours of theoretical and hands on training across obstetric,
+          gynecologic, abdominal, and musculoskeletal imaging.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Contact and Executive Collaboration</h2>
+      <div class="card">
+        <p><strong>Email:</strong> <a href="mailto:jyborges@bu.edu">jyborges@bu.edu</a></p>
+        <p><strong>Phone:</strong> +1 617 895 8403</p>
+        <p class="muted small">
+          Open to full time senior clinical research leadership roles focused on clinical trial expansion, translational infrastructure, investigator enablement, and research enterprise growth across Northern New England.
+        </p>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
