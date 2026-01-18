@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -20,7 +21,7 @@
       margin: 2rem auto;
       padding: 2rem;
       background: #ffffff;
-      box-shadow: 0 10px 25px rgba(0, 0, 00, 0, 0.08);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       border-radius: 0.75rem;
     }
 
@@ -43,7 +44,12 @@
     .muted { color: #6b7280; font-size: 0.95rem; }
     .small { font-size: 0.92rem; }
 
-    /* ===== Header layout: left locked column + right content column ===== */
+    /* ================= HEADER LAYOUT (PRINT FRIENDLY) =================
+       Goal:
+       - Photo aligns vertically with the name/summary block to the right.
+       - Contact box sits under photo, not "too high".
+       - Keywords box becomes horizontal and compact for printing.
+    */
     .header {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -54,20 +60,18 @@
       align-items: start;
     }
 
+    /* LEFT column becomes a fixed rail aligned with the right content block */
     .left-rail {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 0.85rem;
+      align-content: start;
+      /* This is the key alignment fix: drop the entire left rail down slightly
+         so it visually centers with the right headline/summary. */
+      padding-top: 0.55rem;
     }
 
-    .right-rail {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    /* Profile photo: DO NOT ALTER SIZE (kept per your earlier settings) */
+    /* Profile photo: keep your sizing intact */
     .profile-photo {
       width: auto;
       height: 100%;
@@ -80,21 +84,10 @@
       background: #ffffff;
       flex: 0 0 auto;
       margin-top: 10px;
+      display: block;
     }
 
-    .tagline {
-      margin-top: 0.25rem;
-      font-weight: 700;
-      color: #374151;
-    }
-
-    .tertiary {
-      margin-top: 0.15rem;
-      color: #6b7280;
-      font-size: 0.95rem;
-    }
-
-    /* Contact information in a box aligned under the photo */
+    /* Contact information box */
     .contact-box {
       width: 100%;
       border: 1px solid #e5e7eb;
@@ -110,20 +103,24 @@
     .info-value { margin-top: 0.15rem; text-align: left; }
     .info-value .small { display: block; margin-top: 0.15rem; }
 
-    /* Keywords box (rectangular invisible container) below contact box */
+    /* Keywords box: horizontal, compact, does not waste vertical space */
     .keywords-box {
       width: 100%;
-      padding-top: 0.25rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      padding: 0.65rem 0.75rem;
     }
 
     .pill-list {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;          /* keep your spacing */
-      margin: 0;            /* keep layout tight inside the box */
+      flex-wrap: wrap;          /* allows 2-3 rows if needed, still horizontal */
+      gap: 0.5rem;              /* keep your spacing */
+      margin: 0;
       padding: 0;
       list-style: none;
-      justify-content: flex-start; /* start from the left margin */
+      justify-content: flex-start;
+      align-items: center;
     }
 
     .pill-list li {
@@ -133,14 +130,34 @@
       font-size: 0.85rem;
       color: #111827;
       border: 1px solid #e5e7eb;
-      flex: 0 0 auto;       /* content sized pills */
+      flex: 0 0 auto;
       width: auto;
       max-width: 100%;
       text-align: left;
       white-space: nowrap;
+      margin-bottom: 0; /* prevent extra vertical growth */
     }
 
-    /* Badges row on the right rail */
+    /* RIGHT column */
+    .right-rail {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .tagline {
+      margin-top: 0.25rem;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .tertiary {
+      margin-top: 0.15rem;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    /* Badges row */
     .badge-row {
       display: flex;
       flex-wrap: wrap;
@@ -202,12 +219,7 @@
         grid-template-columns: 1fr;
       }
       .left-rail {
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-      }
-      .contact-box, .keywords-box {
-        flex: 1 1 320px;
+        padding-top: 0; /* remove alignment offset on stacked layout */
       }
     }
 
@@ -236,7 +248,7 @@
     ul { margin-top: 0.4rem; padding-left: 1.1rem; }
     li { margin-bottom: 0.35rem; }
 
-    /* Link animation */
+    /* Link animation (kept) */
     a { color: #2563eb; text-decoration: none; }
     a, .badge {
       transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, opacity 160ms ease;
@@ -289,7 +301,7 @@
       a { color: #111827; text-decoration: none; }
       .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
       .kpi { background: #ffffff; }
-      .contact-box { border: 1px solid #d1d5db; }
+      .keywords-box, .contact-box { border: 1px solid #d1d5db; }
     }
   </style>
 </head>
@@ -299,7 +311,7 @@
 
     <header class="header">
 
-      <!-- LEFT LOCKED COLUMN -->
+      <!-- LEFT COLUMN: photo + contact + horizontal keywords -->
       <div class="left-rail" aria-label="Photo, contact information, and keywords">
         <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
 
@@ -338,7 +350,7 @@
           </div>
         </div>
 
-        <div class="keywords-box" aria-label="Keywords container">
+        <div class="keywords-box" aria-label="Keywords box">
           <ul class="pill-list" aria-label="Keywords">
             <li>Artificial Intelligence</li>
             <li>Machine Learning</li>
@@ -355,7 +367,7 @@
         </div>
       </div>
 
-      <!-- RIGHT CONTENT COLUMN -->
+      <!-- RIGHT COLUMN: headline, summary, badges (content unchanged) -->
       <div class="right-rail">
         <h1>Julian Y. V. Borges, MD, MS</h1>
         <div class="tagline">Clinician Scientist | Clinical Informatics | Responsible Clinical AI | Genomics</div>
@@ -389,6 +401,8 @@
       </div>
 
     </header>
+
+    <!-- ===== Everything below remains exactly as you already had it (content unchanged) ===== -->
 
     <section>
       <h2>Research and Leadership Summary</h2>
