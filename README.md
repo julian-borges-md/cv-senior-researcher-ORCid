@@ -73,10 +73,10 @@
       color: #374151;
     }
 
-    /* --- UPDATED: profile photo sizing + alignment --- */
+    /* --- FIXED: profile photo sizing, pulled down, and badge alignment --- */
     .header-identity {
       display: flex;
-      align-items: stretch;
+      align-items: flex-start; /* prevents vertical stretch misalignment */
       gap: 1rem;
     }
 
@@ -87,80 +87,55 @@
     }
 
     .profile-photo {
-      height: 100%;
-      width: auto;
-      aspect-ratio: 3 / 4;
+      width: 170px;           /* consistent portrait size */
+      height: 226px;          /* 3:4 ratio */
       object-fit: cover;
       border-radius: 0.75rem;
       border: 1px solid #e5e7eb;
       background: #ffffff;
       flex: 0 0 auto;
 
-      min-height: 190px;
-      max-height: 260px;
-
-      align-self: flex-start;
-      margin-top: 1.35rem;
+      /* pulls the image down so it is not too high */
+      margin-top: 1.1rem;
     }
 
-    @media (max-width: 900px) {
-      .header-identity { align-items: flex-start; }
-      .profile-photo {
-        min-height: 160px;
-        max-height: 220px;
-        margin-top: 0.9rem;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .header-identity {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .profile-photo {
-        width: 160px;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin-top: 0;
-      }
-    }
-    /* --- END UPDATED --- */
-
-    /* --- UPDATED: badge alignment + consistent height --- */
     .badge-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.75rem;
       align-items: center;
-      line-height: 1;
     }
 
     .badge {
       display: inline-flex;
-      align-items: center;
+      align-items: center;       /* ensures icons and text align vertically */
       justify-content: center;
-      gap: 0.45rem;
+      gap: 0.4rem;
       background: #eef2ff;
       border: 1px solid #e0e7ff;
       border-radius: 999px;
-      padding: 0.35rem 0.85rem;
-      min-height: 34px;
+      padding: 0.25rem 0.75rem;
       font-size: 0.85rem;
+      line-height: 1;            /* critical: prevents baseline drift */
       color: #3730a3;
       text-decoration: none;
       white-space: nowrap;
     }
 
-    .badge-x-icon,
-    .badge-in-icon {
+    .badge svg {
       width: 0.95rem;
       height: 0.95rem;
       display: inline-block;
       flex: 0 0 auto;
     }
-    /* --- END UPDATED --- */
+
+    .badge-x-icon,
+    .badge-in-icon {
+      margin-right: 0;           /* remove legacy spacing that caused drift */
+      vertical-align: middle;
+    }
+    /* --- END FIXED --- */
 
     .section { margin-top: 1.5rem; }
 
@@ -174,6 +149,24 @@
     @media (max-width: 900px) {
       .two-column { grid-template-columns: 1fr; }
       .header-right { text-align: left; }
+
+      .profile-photo {
+        width: 150px;
+        height: 200px;
+        margin-top: 0.9rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .header-identity {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .profile-photo {
+        width: 160px;
+        height: 214px;
+        margin-top: 0;
+      }
     }
 
     .card {
