@@ -43,26 +43,29 @@
     .muted { color: #6b7280; font-size: 0.95rem; }
     .small { font-size: 0.92rem; }
 
-    /* HEADER: left rail (photo + contact) locked left, right content fills remaining space */
     .header {
-      display: grid;
-      grid-template-columns: auto 1fr;
+      display: flex;
+      flex-wrap: wrap;
       gap: 1.25rem;
       border-bottom: 2px solid #e5e7eb;
       padding-bottom: 1rem;
       margin-bottom: 1.5rem;
-      align-items: start;
+      align-items: flex-start;
     }
 
-    .header-left-rail {
+    /* LEFT RAIL LOCKED UNDER PHOTO */
+    .left-rail {
+      flex: 0 0 260px;
+      min-width: 240px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.9rem;
     }
 
+    /* MAIN HEADER CONTENT (NAME, TAGLINE, SUMMARY, BADGES) */
     .header-main {
-      min-width: 0;
+      flex: 1 1 640px;
+      min-width: 320px;
     }
 
     .profile-photo {
@@ -79,22 +82,31 @@
       margin-top: 10px;
     }
 
-    /* Contact block under photo (locked left) */
-    .left-contact {
-      width: 280px;
-      max-width: 280px;
+    /* CONTACT BOX UNDER PHOTO */
+    .contact-box {
+      width: 100%;
+      margin-top: 0.9rem;
       border: 1px solid #e5e7eb;
       border-radius: 0.75rem;
-      padding: 0.9rem;
+      padding: 0.85rem;
       background: #ffffff;
     }
 
-    .info-block { margin-top: 0.15rem; }
+    .info-block { margin-top: 0.1rem; }
     .info-row { margin-top: 0.75rem; }
     .info-row:first-child { margin-top: 0; }
     .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
     .info-value { margin-top: 0.15rem; }
     .info-value .small { display: block; margin-top: 0.15rem; }
+
+    /* PILLS BOX UNDER CONTACT BOX, RECTANGULAR BUT INVISIBLE */
+    .pills-box {
+      width: 100%;
+      margin-top: 0.9rem;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
 
     .tagline {
       margin-top: 0.25rem;
@@ -139,30 +151,56 @@
       flex: 0 0 auto;
     }
 
-    /* Countries box + pills: pills sit to the right of countries and fill to right edge */
-    .meta-row {
-      margin-top: 0.95rem;
-      display: flex;
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      background: #ffffff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 0.9rem;
-      align-items: flex-start;
-      width: 100%;
+      margin-top: 0.9rem;
     }
 
-    .countries-box {
-      flex: 0 0 220px;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 0.75rem 0.9rem;
-      background: #ffffff;
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.9rem;
+      margin-top: 0.9rem;
     }
 
-    .keywords-box {
-      flex: 1 1 auto;
-      min-width: 0;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 0.55rem 0.75rem;
-      background: #ffffff;
+    @media (max-width: 980px) {
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+
+      .header {
+        flex-direction: column;
+      }
+
+      .left-rail {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 0;
+      }
+
+      .profile-photo {
+        width: 160px;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin-top: 0;
+      }
+
+      .contact-box,
+      .pills-box {
+        width: 100%;
+      }
     }
 
     .pill-list {
@@ -187,59 +225,6 @@
       width: auto;
       max-width: 100%;
       text-align: left;
-    }
-
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      background: #ffffff;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
-    }
-
-    @media (max-width: 980px) {
-      .header {
-        grid-template-columns: 1fr;
-      }
-      .left-contact {
-        width: 100%;
-        max-width: none;
-      }
-      .meta-row {
-        flex-direction: column;
-      }
-      .countries-box {
-        flex: 0 0 auto;
-        width: 100%;
-      }
-      .keywords-box {
-        width: 100%;
-      }
-      .grid-3 { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 720px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .profile-photo {
-        width: 160px;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin-top: 0;
-      }
     }
 
     .item { margin-bottom: 1rem; }
@@ -308,7 +293,7 @@
       a { color: #111827; text-decoration: none; }
       .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
       .kpi { background: #ffffff; }
-      .left-contact, .countries-box, .keywords-box { background: #ffffff; }
+      .contact-box { border: 1px solid #d1d5db; }
     }
   </style>
 </head>
@@ -316,12 +301,17 @@
 <body>
   <main class="page">
     <header class="header">
-      <!-- LEFT RAIL: photo + contact info locked under it -->
-      <div class="header-left-rail">
+      <!-- LEFT RAIL: PHOTO + CONTACT BOX + PILLS BOX -->
+      <div class="left-rail">
         <img src="assets/profile.jpg" alt="Julian Y. V. Borges" class="profile-photo" />
 
-        <div class="left-contact" aria-label="Contact and identifiers">
+        <div class="contact-box" aria-label="Contact and identifiers">
           <div class="info-block">
+            <div class="info-row">
+              <div class="info-label">Countries</div>
+              <div class="info-value">United States, Brazil</div>
+            </div>
+
             <div class="info-row">
               <div class="info-label">Primary email</div>
               <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
@@ -351,9 +341,25 @@
             </div>
           </div>
         </div>
+
+        <div class="pills-box" aria-label="Keywords box">
+          <ul class="pill-list" aria-label="Keywords">
+            <li>Artificial Intelligence</li>
+            <li>Machine Learning</li>
+            <li>Deep Learning</li>
+            <li>AI Governance</li>
+            <li>Digital Transformations</li>
+            <li>Digital Health</li>
+            <li>Cardio Endocrinology</li>
+            <li>Molecular Endocrinology</li>
+            <li>Circulatory Physiology</li>
+            <li>Endothelial Dysfunction</li>
+            <li>Vasculature Pathophysiology</li>
+          </ul>
+        </div>
       </div>
 
-      <!-- RIGHT MAIN: identity, badges, summary, countries + keywords row -->
+      <!-- MAIN HEADER: NAME + TAGLINE + SUMMARY + BADGES -->
       <div class="header-main">
         <h1>Julian Y. V. Borges, MD, MS</h1>
         <div class="tagline">Clinician Scientist | Clinical Informatics | Responsible Clinical AI | Genomics</div>
@@ -383,29 +389,6 @@
           </a>
 
           <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
-        </div>
-
-        <div class="meta-row" aria-label="Countries and keywords">
-          <div class="countries-box">
-            <div class="info-label">Countries</div>
-            <div class="info-value">United States, Brazil</div>
-          </div>
-
-          <div class="keywords-box" aria-label="Keywords">
-            <ul class="pill-list">
-              <li>Artificial Intelligence</li>
-              <li>Machine Learning</li>
-              <li>Deep Learning</li>
-              <li>AI Governance</li>
-              <li>Digital Transformations</li>
-              <li>Digital Health</li>
-              <li>Cardio Endocrinology</li>
-              <li>Molecular Endocrinology</li>
-              <li>Circulatory Physiology</li>
-              <li>Endothelial Dysfunction</li>
-              <li>Vasculature Pathophysiology</li>
-            </ul>
-          </div>
         </div>
       </div>
     </header>
