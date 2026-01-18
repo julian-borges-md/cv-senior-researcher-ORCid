@@ -56,23 +56,16 @@
 
     .header-left { flex: 1 1 640px; min-width: 320px; }
 
-    /* Right side now holds two boxes: pills + contact */
     .header-right {
-      flex: 0 0 420px;
-      min-width: 320px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      align-content: start;
-      justify-items: stretch;
+      flex: 0 0 300px;
+      min-width: 280px;
+      text-align: left;
+      font-size: 0.95rem;
+      align-self: flex-start;
+      justify-self: start;
     }
 
-    @media (max-width: 980px) {
-      .header-right {
-        flex: 1 1 420px;
-        grid-template-columns: 1fr;
-      }
-    }
+    .header-right * { text-align: left !important; }
 
     .header-identity {
       display: flex;
@@ -84,6 +77,7 @@
       display: flex;
       flex-direction: column;
       min-width: 0;
+      flex: 1 1 auto;
     }
 
     .profile-photo {
@@ -143,61 +137,33 @@
       flex: 0 0 auto;
     }
 
-    /* Two right-side cards */
-    .side-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 0.9rem;
-      background: #ffffff;
-      height: 100%;
-    }
-
-    .side-title {
-      font-weight: 800;
-      font-size: 0.92rem;
-      color: #111827;
-      margin: 0 0 0.5rem;
-    }
-
-    /* Structured right column rows (label/value) */
-    .info-block { margin-top: 0.1rem; }
-    .info-row { margin-top: 0.65rem; }
-    .info-row:first-child { margin-top: 0; }
+    /* Right column blocks */
+    .info-block { margin-top: 0.25rem; }
+    .info-row { margin-top: 0.75rem; }
     .info-label { color: #6b7280; font-size: 0.92rem; font-weight: 700; }
     .info-value { margin-top: 0.15rem; }
     .info-value .small { display: block; margin-top: 0.15rem; }
 
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      background: #ffffff;
-    }
-
-    .grid-2 {
+    /* NEW: pills block that lives on the right side of the header */
+    .header-meta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 0.9rem;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items: start;
     }
 
-    @media (max-width: 720px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .header-identity { flex-direction: column; align-items: flex-start; }
-      .profile-photo {
-        width: 160px;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        margin-top: 0;
-      }
-    }
+    /* Keep contact info visually on the LEFT within this meta grid */
+    .meta-left { min-width: 0; }
+
+    /* Pills on the RIGHT within this meta grid */
+    .meta-right { min-width: 0; }
 
     .pill-list {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin: 0;
+      margin: 0;              /* controlled by grid spacing */
       padding: 0;
       list-style: none;
       justify-content: flex-start;
@@ -215,6 +181,38 @@
       width: auto;
       max-width: 100%;
       text-align: left;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      background: #ffffff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .header-right { flex: 1 1 320px; }
+      .header-meta-grid { grid-template-columns: 1fr; }
+      .meta-right { margin-top: 0.5rem; }
+    }
+
+    @media (max-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .header-identity { flex-direction: column; align-items: flex-start; }
+      .profile-photo {
+        width: 160px;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        margin-top: 0;
+      }
     }
 
     .item { margin-bottom: 1rem; }
@@ -283,7 +281,6 @@
       a { color: #111827; text-decoration: none; }
       .badge { border: 1px solid #d1d5db; background: #ffffff; color: #111827; box-shadow: none; }
       .kpi { background: #ffffff; }
-      .side-card { border: 1px solid #d1d5db; }
     }
   </style>
 </head>
@@ -325,68 +322,75 @@
 
               <a class="badge" href="https://dataverse.harvard.edu/dataverse/julian_borges" target="_blank" rel="noopener">Harvard Dataverse</a>
             </div>
+
+            <!-- NEW: contact info stays on the LEFT (within this block), pills go to the RIGHT -->
+            <div class="header-meta-grid" aria-label="Contact info and keywords">
+              <div class="meta-left">
+                <div class="card" style="padding:0.9rem;">
+                  <div class="info-block">
+                    <div class="info-row" style="margin-top:0;">
+                      <div class="info-label">Countries</div>
+                      <div class="info-value">United States, Brazil</div>
+                    </div>
+
+                    <div class="info-row">
+                      <div class="info-label">Primary email</div>
+                      <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
+                    </div>
+
+                    <div class="info-row">
+                      <div class="info-label">Other IDs</div>
+                      <div class="info-value">
+                        <div class="small">
+                          Scopus Author ID:
+                          <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
+                        </div>
+                        <div class="small">
+                          SciProfiles:
+                          <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
+                        </div>
+                        <div class="small">
+                          ResearcherID:
+                          <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="info-row">
+                      <div class="info-label">Core methods and tooling</div>
+                      <div class="info-value">Python, R, Stata, SQL</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-right">
+                <div class="card" style="padding:0.9rem;">
+                  <div class="info-label" style="margin-top:0;">Keywords</div>
+                  <ul class="pill-list" aria-label="Keywords" style="margin-top:0.5rem;">
+                    <li>Artificial Intelligence</li>
+                    <li>Machine Learning</li>
+                    <li>Deep Learning</li>
+                    <li>AI Governance</li>
+                    <li>Digital Transformations</li>
+                    <li>Digital Health</li>
+                    <li>Cardio Endocrinology</li>
+                    <li>Molecular Endocrinology</li>
+                    <li>Circulatory Physiology</li>
+                    <li>Endothelial Dysfunction</li>
+                    <li>Vasculature Pathophysiology</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- END NEW -->
+
           </div>
         </div>
       </div>
 
-      <!-- RIGHT SIDE: pills in a separate box next to contact info -->
-      <div class="header-right" aria-label="Right side panels">
-        <aside class="side-card" aria-label="Keywords panel">
-          <div class="side-title">Keywords</div>
-          <ul class="pill-list" aria-label="Keywords">
-            <li>Artificial Intelligence</li>
-            <li>Machine Learning</li>
-            <li>Deep Learning</li>
-            <li>AI Governance</li>
-            <li>Digital Transformations</li>
-            <li>Digital Health</li>
-            <li>Cardio Endocrinology</li>
-            <li>Molecular Endocrinology</li>
-            <li>Circulatory Physiology</li>
-            <li>Endothelial Dysfunction</li>
-            <li>Vasculature Pathophysiology</li>
-          </ul>
-        </aside>
-
-        <aside class="side-card" aria-label="Contact and identifiers">
-          <div class="side-title">Contact and Identifiers</div>
-          <div class="info-block">
-            <div class="info-row">
-              <div class="info-label">Countries</div>
-              <div class="info-value">United States, Brazil</div>
-            </div>
-
-            <div class="info-row">
-              <div class="info-label">Primary email</div>
-              <div class="info-value"><a href="mailto:fxmedbrasil@gmail.com">fxmedbrasil@gmail.com</a></div>
-            </div>
-
-            <div class="info-row">
-              <div class="info-label">Other IDs</div>
-              <div class="info-value">
-                <div class="small">
-                  Scopus Author ID:
-                  <a href="http://www.scopus.com/inward/authorDetails.url?authorID=59247184100&partnerID=MN8TOARS" target="_blank" rel="noopener">59247184100</a>
-                </div>
-                <div class="small">
-                  SciProfiles:
-                  <a href="https://sciprofiles.com/profile/3701785" target="_blank" rel="noopener">3701785</a>
-                </div>
-                <div class="small">
-                  ResearcherID:
-                  <a href="https://www.webofscience.com/wos/author/record/KVZ-2689-2024" target="_blank" rel="noopener">KVZ-2689-2024</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="info-row">
-              <div class="info-label">Core methods and tooling</div>
-              <div class="info-value">Python, R, Stata, SQL</div>
-            </div>
-          </div>
-        </aside>
-      </div>
-      <!-- END RIGHT SIDE -->
+      <!-- Keep this right column available for future content; currently empty by design -->
+      <div class="header-right" aria-label="Right column"></div>
     </header>
 
     <section>
@@ -448,13 +452,13 @@
           <div class="subheading">Graduate and Certificate Training</div>
           <ul>
             <li>Boston University | MS Health Informatics (Data Analytics) candidate | 2025 to 2027</li>
-            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT) | 2024 to 2025</li>
+            <li>Harvard Medical School | Global Clinical Scholars Research Training, Genetic Epidemiology elective (GCSRT)| 2024 to 2025</li>
             <li>UC San Diego | Drug discovery, development, and product management specialization | 2025</li>
             <li>Northeastern University | Health informatics for healthcare professionals certificate | 2025</li>
             <li>Johns Hopkins | Clinical informatics specialization | 2025</li>
             <li>Johns Hopkins | Bioinformatics, Python for genomic data science certificate | 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP) | 2025</li>
-            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR) | 2024</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Pharmacology (IPCP)| 2025</li>
+            <li>NIH OCRECO | Principles and Practices of Clinical Research (IPCR)| 2024</li>
             <li>HarvardX via edX | AI and machine learning with R and Python, statistics and R, Python for research | 2024</li>
             <li>Pontifícia Universidade Católica de Goiás | Medical genetics masters program | 2015 to 2016</li>
           </ul>
@@ -463,9 +467,9 @@
         <div class="card">
           <div class="subheading">Medical Training and Board Certification</div>
           <ul>
-            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine (MD) | 1996 to 2002</li>
+            <li>Centro Universitário Serra dos Órgãos | Doctor of Medicine MD | 1996 to 2002</li>
             <li>Endocrinology, diabetes and metabolism | Board certification (SBEM/CFM/AMB) | 2014</li>
-            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB) | 2013 to 2014</li>
+            <li>Clinical nutrition and nutrology | Board certification (ABRAN/CFM/AMB)| 2013 to 2014</li>
             <li>Nutrology fellowship | 2012 to 2013</li>
             <li>Endocrinology fellowship | 2011 to 2013</li>
             <li>Medical biochemistry postgraduate program | 2006 to 2008</li>
@@ -569,149 +573,4 @@
           </li>
 
           <li>
-            A Machine Learning Framework for Early Detection of Cardiovascular Risk Using Diabetes Related Indicators (2024).
-            <a href="https://doi.org/10.21203/rs.3.rs-4971115/v1" target="_blank" rel="noopener">DOI:10.21203/rs.3.rs-4971115/v1</a>
-          </li>
-
-          <li>
-            Mitigating the Opioid Epidemic: The Role of Cannabinoids in Chronic Pain Management (2024).
-            <a href="https://doi.org/10.1101/2024.07.14.24310378" target="_blank" rel="noopener">DOI:10.1101/2024.07.14.24310378</a>
-            <span class="muted small"> | </span>
-            <a href="https://doi.org/10.33140/JAPM.09.03.05" target="_blank" rel="noopener">DOI:10.33140/JAPM.09.03.05</a>
-          </li>
-
-          <li>
-            Trends in Sudden Cardiac Death in Pilots (2011 to 2023) (2024).
-            <a href="https://doi.org/10.1101/2024.06.29.24309708" target="_blank" rel="noopener">DOI:10.1101/2024.06.29.24309708</a>
-            <span class="muted small"> | </span>
-            <a href="https://doi.org/10.33140/IJPMC.02.02.04" target="_blank" rel="noopener">DOI:10.33140/IJPMC.02.02.04</a>
-          </li>
-
-          <li>
-            Artificial Intelligence in Pain Management: Advancing Translational Science in Digital Health Research from Bench to Bedside (2024).
-            <a href="https://doi.org/10.33140/AMLAI.05.03.04" target="_blank" rel="noopener">DOI:10.33140/AMLAI.05.03.04</a>
-          </li>
-
-          <li>
-            Emerging Digital Health Interventions Toward Cardiovascular Care: Key Insights for 2025 (2024).
-            <a href="https://doi.org/10.2139/ssrn.4981082" target="_blank" rel="noopener">DOI:10.2139/ssrn.4981082</a>
-          </li>
-
-          <li>
-            Erectile Dysfunction and Cardiovascular Disease Risk: Updated 2024 systematic review meta analysis (2024).
-            <a href="https://doi.org/10.21203/rs.3.rs-4681079/v1" target="_blank" rel="noopener">DOI:10.21203/rs.3.rs-4681079/v1</a>
-          </li>
-
-          <li>
-            Innovative E Health Technologies for Cardiovascular Disease Treatment: 2024 updated systematic review and meta analysis (2024).
-            <a href="https://doi.org/10.1101/2024.06.29.24309706" target="_blank" rel="noopener">DOI:10.1101/2024.06.29.24309706</a>
-          </li>
-
-          <li>
-            Major clinical outcomes and discussions of religiosity spirituality in patients with palliative care and nutrology therapy (2024).
-            <a href="https://doi.org/10.54448/IJN24409" target="_blank" rel="noopener">DOI:10.54448/IJN24409</a>
-          </li>
-
-          <li>
-            Precision Medicine in Cardiology: Biomarkers in coronary artery disease prevention, thematic review (2024).
-            <a href="https://doi.org/10.1101/2024.07.01.24309804" target="_blank" rel="noopener">DOI:10.1101/2024.07.01.24309804</a>
-            <span class="muted small"> | </span>
-            <a href="https://doi.org/10.26502/FCCM.92920395" target="_blank" rel="noopener">DOI:10.26502/FCCM.92920395</a>
-          </li>
-
-          <li>
-            The Inverse Association between Potassium Intake and Cardiovascular Disease Risk (2024).
-            <a href="https://doi.org/10.21203/RS.3.RS-4699824/V1" target="_blank" rel="noopener">DOI:10.21203/RS.3.RS-4699824/V1</a>
-          </li>
-
-          <li>
-            Thromboembolic Risk and Testosterone Replacement Therapy: Debunking myths and clarifying evidence (2024).
-            <a href="https://doi.org/10.21203/RS.3.RS-5134020/V1" target="_blank" rel="noopener">DOI:10.21203/RS.3.RS-5134020/V1</a>
-          </li>
-        </ul>
-
-        <p class="muted small" style="margin-bottom:0;">
-          Peer review activity (summary): PLOS Digital Health (36), European Journal of Preventive Cardiology (7), European Heart Journal (2), Diabetes and Metabolic Syndrome (2), Nature Reviews (1), Journal of Advances in Medicine and Medical Research (1).
-        </p>
-      </div>
-    </section>
-
-    <section class="section two-column">
-      <div>
-        <h2>Editorial Roles and Peer Review</h2>
-        <div class="card">
-          <div class="subheading">Editorial Roles</div>
-          <ul>
-            <li>Academic Editor, PLOS Digital Health</li>
-            <li>Editorial Board Member, International Journal of Diabetes and Endocrinology</li>
-            <li>Editorial Board Member, International Journal of Epidemiology and Public Health Research</li>
-          </ul>
-
-          <div class="subheading">Peer Review</div>
-          <p class="small">
-            Reviewer for journals including PLOS Digital Health, European Heart Journal Digital Health, NaTure Reviews and European Journal of Preventive Cardiology, focused on clinical research rigor, digital health translation, and clinical analytics integrity.
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <h2>Research Portfolio Themes</h2>
-        <div class="card">
-          <ul>
-            <li>Clinical research infrastructure and governance models enabling safe translation to care</li>
-            <li>Clinical AI governance, auditability, and deployment safety in real clinical environments</li>
-            <li>Applied analytics for cardiometabolic risk stratification and outcomes measurement</li>
-            <li>Genomic epidemiology and bioinformatics for translational inference and precision prevention</li>
-          </ul>
-
-          <div class="subheading">MitoCoreX Project, Principal Investigator</div>
-          <p class="small">
-            AI enabled discovery and development platform designed to optimize mitochondrial function through genomics aware targeting, multi agent systems, reinforcement learning, and in silico validation for aging related disease, neurodegeneration, and metabolic performance.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Professional Affiliations</h2>
-      <div class="card">
-        <ul>
-          <li>American Medical Informatics Association (AMIA)</li>
-          <li>American Medical Association (AMA)</li>
-          <li>Endocrine Society</li>
-          <li>American Society for Nutrition (ASN)</li>
-          <li>American College of Sports Medicine (ACSM)</li>
-          <li>American Physician Scientists Association (APSA)</li>
-          <li>American College of Physicians (ACP)</li>
-          <li>Brazilian Society of Endocrinology and Metabolism (SBEM)</li>
-          <li>Brazilian Medical Nutrition Association (ABRAN)</li>
-          <li>Brazilian Society of Sports Medicine (SBME)</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Clinical Imaging Training</h2>
-      <div class="card">
-        <p class="small">
-          Completed structured programs in obstetric, transvaginal, internal medicine, and musculoskeletal ultrasound at FÉRTILE Diagnósticos,
-          an accredited SBUS teaching center in Goiânia, Brazil, including more than three hundred hours of theoretical and hands on training across obstetric,
-          gynecologic, abdominal, and musculoskeletal imaging.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Contact and Executive Collaboration</h2>
-      <div class="card">
-        <p><strong>Email:</strong> <a href="mailto:jyborges@bu.edu">jyborges@bu.edu</a></p>
-        <p><strong>Phone:</strong> +1 617 895 8403</p>
-        <p class="muted small">
-          Open to full time senior clinical research leadership roles focused on clinical trial expansion, translational infrastructure, investigator enablement, and research enterprise growth across Northern New England.
-        </p>
-      </div>
-    </section>
-
-  </main>
-</body>
-</html>
+            A Machine Learning Framework for Early Detection of Cardiovascular Risk Using Diabetes Related Indicators (20
